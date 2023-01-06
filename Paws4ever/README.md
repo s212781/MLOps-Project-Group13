@@ -1,9 +1,13 @@
 DoggieDoggie
 ==============================
+## Introduction
+Throughout this project, the aim is to develop a machine learning operations pipeline for a simple dogs breed classification task. The material learnt through DTU's 02476 Machine Learning Operations course will be applied through the course of this porject.
+
+## Dataset
+To create a good classifier, a good dataset is needed. The Standford Dogs Dataset found on Kaggle will be used. It includes 20.000 images and features 120 different dog breeds.
 
 ## Framework
-
-This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models (timm) framwork will be used. The timm framework is part of fast.ai  
+To do this, the Pytorch Image Models (timm) framework will be used since it is one of the most used computer vision package. The timm framework is part of fast.ai  
 
 Since the content of the dataset is images, the optimal models has to consist of convolutional networks. Going into more detail, by utilising the summary of models given in the timm documentation, these models could potential contenders:
 
@@ -11,13 +15,11 @@ Since the content of the dataset is images, the optimal models has to consist of
 - Xception
 - Inception-V3
 
-## Dataset
-
-To create a good classifier, a good dataset is needed. The Standford Dogs Dataset found on Kaggle includes 20.000 images and features 120 dog breeds.
 
 ## Other frameworks used
 
 Albumentations - Could potentially be used to augment data if we perform training on the framework. This is uncertain since training could take too long given our hardware limititations. 
+
 
 Organization
 ------------
