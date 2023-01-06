@@ -1,15 +1,15 @@
 DoggieDoggie
 ==============================
 
-# Framework
+## Framework
 
-This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models framwork will be used. 
+This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models (timm) framwork will be used. 
 
-# Dataset
+## Dataset
 
 To create a good classifier, a good dataset is needed. The Standford Dogs Dataset found on Kaggle includes 20.000 images and features 120 dog breeds.
 
-# Other frameworks used
+## Other frameworks used
 
 Albumentations
 
