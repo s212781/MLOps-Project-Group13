@@ -3,7 +3,13 @@ DoggieDoggie
 
 ## Framework
 
-This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models (timm) framwork will be used. 
+This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models (timm) framwork will be used. The timm framework is part of fast.ai  
+
+Since the content of the dataset is images, the optimal models has to consist of convolutional networks. Going into more detail, by utilising the summary of models given in the timm documentation, these models could potential contenders:
+
+- Cross-Stage Partial Networks
+- Xception
+- P PNasNet-5
 
 ## Dataset
 
