@@ -17,10 +17,9 @@ To create a good classifier, a good dataset is needed. The Standford Dogs Datase
 
 ## Other frameworks used
 
-Albumentations
+Albumentations - Could potentially be used to augment data if we perform training on the framework. This is uncertain since training could take too long given our hardware limititations. 
 
 (Hydra)?
-
 
 Organization
 ------------
