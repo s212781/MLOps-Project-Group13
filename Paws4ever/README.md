@@ -3,7 +3,7 @@ DoggieDoggie
 
 # Framework
 
-This project will focus on classifying species of dogs. To do this, the Pytorch Image Models framwork will be used. 
+This project will focus on classifying different breeds of dogs. To do this, the Pytorch Image Models framwork will be used. 
 
 # Dataset
 
