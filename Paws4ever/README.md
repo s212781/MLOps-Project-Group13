@@ -1,9 +1,22 @@
 DoggieDoggie
 ==============================
 
-Classifier of dog species
+# Framework
 
-Project Organization
+This project will focus on classifying species of dogs. To do this, the Pytorch Image Models framwork will be used. 
+
+# Dataset
+
+To create a good classifier, a good dataset is needed. The Standford Dogs Dataset found on Kaggle includes 20.000 images and features 120 dog breeds.
+
+# Other frameworks used
+
+Albumentations
+
+(Hydra)?
+
+
+Organization
 ------------
 
     ├── LICENSE
