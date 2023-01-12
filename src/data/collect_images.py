@@ -4,13 +4,13 @@
 
 import shutil
 import os
-import glob
 
 dst_dir = "data/external/images/all"
 src_dir = "data/external/images/Images/"
 
 if not os.path.exists(dst_dir):
     os.mkdir(dst_dir)
+    
 # loops through folders
 for dirpath, dirnames, filenames in os.walk(src_dir):
     # looops through images

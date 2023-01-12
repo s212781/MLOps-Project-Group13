@@ -11,26 +11,35 @@ import dill
 import cv2
 import pytest
 
+from convert_label import create_lbl_lst
+
+
 def mnist(path):
     """ Using dogs dataset """
-    
+    h = w = 28
     class MyDataset(Dataset):
         def __init__(self, path):
             lbs = []
+            lbs2 = [] #sry
             imgs = []
             for c in os.listdir(path):
                 img_path = path+c
                 img = cv2.imread(img_path)
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                img = cv2.resize(img,(100,100))
-                
-                label = int(img_path[img_path.find('n0')+1:img_path.find('_')])
-          
+                img = cv2.resize(img,(h,w))
+                label = int(c[c.find('n0')+5:c.find('_')])
+                # label = int(img_path[img_path.find('n0')+5:img_path.find('_')])
+
                 lbs.append(label)
                 imgs.append(img)
+            
+            label_dict = create_lbl_lst()
 
-            self.images = torch.tensor(imgs).reshape(-1,1,100,100)
-            self.labels = torch.tensor(lbs)
+            for i in range(len(lbs)):
+                lbs2.append(label_dict.index(lbs[i]))
+
+            self.images = torch.tensor(imgs).reshape(-1,1,h,w)
+            self.labels = torch.tensor(lbs2)
        
         def __len__(self):
             return self.images.shape[0]
@@ -43,7 +52,7 @@ def mnist(path):
     return data_set
 
 if __name__ == "__main__":
-    path = "data/external/images/all/"
+    path = "data/external/images/all_cropped/"
     data_set = mnist(path)
 
     output_path = "data/processed/"
