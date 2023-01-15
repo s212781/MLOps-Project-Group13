@@ -6,7 +6,7 @@ class Model(nn.Module):
     def __init__(self):
         super().__init__()
         self.input_dims = 100
-        y = lambda a: torch.floor((a - 4) / 2)
+        def y(a): return torch.floor((a - 4) / 2)
         self.conv = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
             nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=0),
