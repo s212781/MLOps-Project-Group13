@@ -25,7 +25,6 @@ def mnist(path):
                 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                 img = cv2.resize(img, (h, w))
                 label = int(c[c.find("n0") + 5: c.find("_")])
-                # label = int(img_path[img_path.find('n0')+5:img_path.find('_')])
 
                 lbs.append(label)
                 imgs.append(img)
