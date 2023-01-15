@@ -19,9 +19,7 @@ class Model(nn.Module):
             nn.MaxPool2d(2, stride=1),
         )
         self.fc = nn.Sequential(
-            nn.Linear(128 * y(y(y(self.input_dims))), 256),
-            nn.ReLU(),
-            nn.Linear(256, 128),
+            nn.Linear(128 * y(y(y(self.input_dims))), 256), nn.ReLU(), nn.Linear(256, 128),
         )
 
     def forward(self, x):

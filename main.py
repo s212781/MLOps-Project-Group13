@@ -1,11 +1,10 @@
-import torch
-import wandb
-from torch import optim, nn
-from torch.utils.data import Dataset, DataLoader
-
 # from src.features.build_features import MyAwesomeModel as Mymodel
 # from src.models import train_model
 import dill
+import torch
+import wandb
+from torch import nn, optim
+from torch.utils.data import DataLoader, Dataset
 
 data_set = torch.load("data/processed/data_tensor.pt", pickle_module=dill)
 
