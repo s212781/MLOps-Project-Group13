@@ -158,7 +158,7 @@ def evaluate(model, val_loader):
 if __name__ == "__main__": 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("DEVICE :: ",device)
-    dataset = ImageFolder('data/external/images/Images')
+    dataset = ImageFolder('data/processed/images/')
     model = DogBreedPretrainedResnet34()
     model.to(device)
 
