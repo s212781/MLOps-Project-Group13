@@ -81,7 +81,7 @@ class DogBreedPretrainedResnet34(ImageClassificationBase):
     def __init__(self):
         super().__init__()
         # torchvision.models.ResNet18_Weights
-        self.network = models.resnet34(weights=torchvision.models.ResNet34_Weights.DEFAULT,pretrained=True)
+        self.network = models.resnet34(weights=torchvision.models.ResNet34_Weights.DEFAULT)
         # Replace last layer
         num_ftrs = self.network.fc.in_features
         self.network.fc = nn.Sequential(
