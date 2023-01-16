@@ -171,7 +171,7 @@ if __name__ == "__main__":
     train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_size])
     imagenet_stats = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
-    img_size = [100, 100]
+    img_size = [224, 224]
     train_transform = transforms.Compose([
        transforms.Resize((img_size[0], img_size[1])),
         # transforms.Resize((256, 256)),
@@ -200,7 +200,7 @@ if __name__ == "__main__":
     val_dataset = DogBreedDataset(val_ds, val_transform)
     test_dataset = DogBreedDataset(test_ds, test_transform)
     
-    batch_size = 2
+    batch_size = 32
 
     # Create DataLoaders
     train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=1, pin_memory=True)
