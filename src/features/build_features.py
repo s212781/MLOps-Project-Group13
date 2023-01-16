@@ -1,31 +1,28 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 
 
-class Model(nn.Module):
+class MyAwesomeModel(nn.Module):
     def __init__(self):
-        super().__init__()
-        self.input_dims = 100
-        y = lambda a: torch.floor((a - 4) / 2)
-        self.conv = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=0),
-            nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=0),
-            nn.MaxPool2d(2, stride=1),
-            nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=0),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=0),
-            nn.MaxPool2d(2, stride=1),
-            nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=0),
-            nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=0),
-            nn.MaxPool2d(2, stride=1),
-        )
-        self.fc = nn.Sequential(
-            nn.Linear(128 * y(y(y(self.input_dims))), 256),
-            nn.ReLU(),
-            nn.Linear(256, 128),
-        )
-
+        super(MyAwesomeModel, self).__init__()
+        self.conv1 = nn.Conv2d(1, 32, kernel_size=5)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=5)
+        self.conv3 = nn.Conv2d(64, 256, kernel_size=5)
+        self.fc1 = nn.Linear(3*3*256, 512)
+        self.fc2 = nn.Linear(512, 120)
+        
     def forward(self, x):
-        x = self.conv(x)
-        x = torch.flatten(x, 1)
-        x = self.fc(x)
-        return x
+        # catching dimension errors.
+        if x.ndim != 4:
+            raise ValueError('Expected input to a 4D tensor')
+        if x.shape[1] != 1 or x.shape[2] != 28 or x.shape[3] != 28:
+            raise ValueError('Expected each sample to have shape [1, 28, 28]')
+        
+        x = F.relu(self.conv1(x))
+        x = F.relu(F.max_pool2d(self.conv2(x), 2))
+        x = F.relu(F.max_pool2d(self.conv3(x),2))
+        x = x.view(-1,3*3*256 )
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+        return F.log_softmax(x, dim=1)
