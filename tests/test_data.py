@@ -3,7 +3,10 @@ import pytest
 from tests import _PATH_DATA
 from src.data.make_dataset import mnist
 
+import os.path
 
+
+@pytest.mark.skipif(not os.path.exists(_PATH_DATA), reason="Data files not found")
 def test_data():
 
     dataset = mnist(_PATH_DATA)
