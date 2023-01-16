@@ -26,17 +26,25 @@ from tqdm.notebook import tqdm
 class ImageClassificationBase(nn.Module):
     # training step
     def training_step(self, batch):
-        img, targets = batch
-        out = self(img)
-        loss = F.nll_loss(out, targets)
+        images, labels = batch
+
+        if torch.cuda.is_available():
+            images = images.cuda()
+            labels = labels.cuda()        
+            
+        out = self(images)
+        loss = F.nll_loss(out, labels)
         return loss
     
     # validation step
     def validation_step(self, batch):
-        img, targets = batch
-        out = self(img)
-        loss = F.nll_loss(out, targets)
-        acc = accuracy(out, targets)
+        images, labels = batch
+        if torch.cuda.is_available():
+            images = images.cuda()
+            labels = labels.cuda()   
+        out = self(images)
+        loss = F.nll_loss(out, labels)
+        acc = accuracy(out, labels)
         return {'val_acc':acc.detach(), 'val_loss':loss.detach()}
     
     # validation epoch end
@@ -104,8 +112,7 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader, weight_decay=
         lrs = []
         for batch in tqdm(train_loader):
             steps += 1
-            if torch.cuda.is_available():
-                batch = batch.cuda()
+
                 
             loss = model.training_step(batch)
             train_losses.append(loss)
