@@ -192,7 +192,7 @@ if __name__ == "__main__":
     val_dataset = DogBreedDataset(val_ds, val_transform)
     test_dataset = DogBreedDataset(test_ds, test_transform)
     
-    batch_size = 64
+    batch_size = 32
 
     # Create DataLoaders
     train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=2, pin_memory=True)
