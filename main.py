@@ -112,8 +112,7 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader, weight_decay=
         lrs = []
         for batch in tqdm(train_loader):
             steps += 1
-
-                
+             
             loss = model.training_step(batch)
             train_losses.append(loss)
             
@@ -172,10 +171,11 @@ if __name__ == "__main__":
     train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_size])
     imagenet_stats = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
+    img_size = [100, 100]
     train_transform = transforms.Compose([
-    #    transforms.Resize((224, 224)),
-        transforms.Resize((256, 256)),
-        transforms.RandomCrop(224, padding=4, padding_mode='reflect'),
+       transforms.Resize((img_size[0], img_size[1])),
+        # transforms.Resize((256, 256)),
+        transforms.RandomCrop(img_size[0], padding=4, padding_mode='reflect'),
         transforms.RandomHorizontalFlip(p=0.3),
         transforms.RandomRotation(degrees=30),
         transforms.ToTensor(),
@@ -185,13 +185,13 @@ if __name__ == "__main__":
 
 
     val_transform = transforms.Compose([
-        transforms.Resize((224,224)),
+        transforms.Resize((img_size[0], img_size[1])),
         transforms.ToTensor(),
     #    transforms.Normalize(*imagenet_stats, inplace=True)
     ])
 
     test_transform = transforms.Compose([
-        transforms.Resize((224,224)), 
+        transforms.Resize((img_size[0], img_size[1])), 
         transforms.ToTensor(),
     #    transforms.Normalize(*imagenet_stats, inplace=True)
     ])
@@ -200,7 +200,7 @@ if __name__ == "__main__":
     val_dataset = DogBreedDataset(val_ds, val_transform)
     test_dataset = DogBreedDataset(test_ds, test_transform)
     
-    batch_size = 4
+    batch_size = 2
 
     # Create DataLoaders
     train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=1, pin_memory=True)
