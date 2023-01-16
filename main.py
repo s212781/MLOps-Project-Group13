@@ -42,6 +42,7 @@ class ImageClassificationBase(nn.Module):
         if torch.cuda.is_available():
             images = images.cuda()
             labels = labels.cuda()   
+        
         out = self(images)
         loss = F.nll_loss(out, labels)
         acc = accuracy(out, labels)
@@ -200,11 +201,11 @@ if __name__ == "__main__":
     val_dataset = DogBreedDataset(val_ds, val_transform)
     test_dataset = DogBreedDataset(test_ds, test_transform)
     
-    batch_size = 32
+    batch_size = 64
 
     # Create DataLoaders
-    train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=1, pin_memory=True)
-    val_dl = DataLoader(val_dataset, batch_size, num_workers=1, pin_memory=True)
-    test_dl = DataLoader(test_dataset, batch_size, num_workers=1, pin_memory=True)
+    train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=0, pin_memory=True)
+    val_dl = DataLoader(val_dataset, batch_size, num_workers=0, pin_memory=True)
+    test_dl = DataLoader(test_dataset, batch_size, num_workers=0, pin_memory=True)
 
     fit_one_cycle(epochs=1, max_lr=0.001, model=model, train_loader=train_dl, val_loader=val_dl)
