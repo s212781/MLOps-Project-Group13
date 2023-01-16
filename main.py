@@ -136,14 +136,15 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader, weight_decay=
             # modifies the lr value
             sched.step()
             if steps % print_every == 0:
-                # Model in inference mode, dropout is off
-                
-                # Validation phase
-                result = evaluate(model, val_loader)
-                result['train_loss'] = torch.stack(train_losses).mean().item()
-                result['lrs'] = lrs
-                model.epoch_end(epoch, result)
-                history.append(result)
+                with torch.no_grad():
+                    # Model in inference mode, dropout is off
+                    
+                    # Validation phase
+                    result = evaluate(model, val_loader)
+                    result['train_loss'] = torch.stack(train_losses).mean().item()
+                    result['lrs'] = lrs
+                    model.epoch_end(epoch, result)
+                    history.append(result)
                 
         
     return history
