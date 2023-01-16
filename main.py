@@ -104,6 +104,9 @@ def fit_one_cycle(epochs, max_lr, model, train_loader, val_loader, weight_decay=
         lrs = []
         for batch in tqdm(train_loader):
             steps += 1
+            if torch.cuda.is_available():
+                batch = batch.cuda()
+                
             loss = model.training_step(batch)
             train_losses.append(loss)
             
@@ -145,8 +148,11 @@ def evaluate(model, val_loader):
     return model.validation_epoch_end(outputs)
 
 if __name__ == "__main__": 
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     dataset = ImageFolder('data/external/images/Images')
     model = DogBreedPretrainedResnet34()
+    model.to(device)
+
     test_pct = 0.3
     test_size = int(len(dataset)*test_pct)
     dataset_size = len(dataset) - test_size

@@ -22,6 +22,7 @@ def train(model, trainloader, testloader, criterion, optimizer=None, epochs=5, p
             if torch.cuda.is_available():
                 images = images.cuda()
                 labels = labels.cuda()
+                
             # print(images.shape)
             # print(labels)
             optimizer.zero_grad()
