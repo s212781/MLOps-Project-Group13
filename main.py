@@ -196,8 +196,8 @@ if __name__ == "__main__":
     batch_size = 4
 
     # Create DataLoaders
-    train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=2, pin_memory=True)
-    val_dl = DataLoader(val_dataset, batch_size*2, num_workers=2, pin_memory=True)
-    test_dl = DataLoader(test_dataset, batch_size*2, num_workers=2, pin_memory=True)
+    train_dl = DataLoader(train_dataset, batch_size, shuffle=True, num_workers=1, pin_memory=True)
+    val_dl = DataLoader(val_dataset, batch_size*2, num_workers=1, pin_memory=True)
+    test_dl = DataLoader(test_dataset, batch_size*2, num_workers=1, pin_memory=True)
 
     fit_one_cycle(epochs=1, max_lr=0.001, model=model, train_loader=train_dl, val_loader=val_dl)
