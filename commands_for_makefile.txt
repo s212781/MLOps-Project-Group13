@@ -1,0 +1,3 @@
+docker build -f .\dockerfile.dockerfile . -t project_docker:latest
+docker tag project_docker gcr.io/dtumlops-374307/project_docker
+docker push gcr.io/dtumlops-374307/project_docker
