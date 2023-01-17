@@ -15,7 +15,7 @@ def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     trainloader = DataLoader(train_dataset, batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
     validloader = DataLoader(valid_dataset, batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs, print_every=1)
 
 def validate(model_path, batch_size, num_workers, criterion):
     print("Evaluating...")
