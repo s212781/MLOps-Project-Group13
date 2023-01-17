@@ -32,7 +32,7 @@ def validate(model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model = models.resnet152(models.ResNet152_Weights.DEFAULT, pretrained=True)
+    model = models.resnet152(models.ResNet152_Weights.DEFAULT)
     num_ftrs = model.fc.in_features
     
     model.fc = nn.Linear(num_ftrs, 120)
