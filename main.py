@@ -35,9 +35,9 @@ def validate(model_path, batch_size, num_workers, criterion):
 def create_model():
     model = timm.create_model('resnet50', pretrained=True, num_classes=120)
     # model = models.resnet152(pretrained=True)
-    num_ftrs = model.fc.in_features
+    # num_ftrs = model.fc.in_features
     
-    model.fc = nn.Linear(num_ftrs, 120)
+    # model.fc = nn.Linear(num_ftrs, 120)
    
     return model
 
