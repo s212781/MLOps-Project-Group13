@@ -42,7 +42,7 @@ def create_model():
 def train_params():
     bs = 64
     lr  = 0.001
-    epochs = 5
+    epochs = 3
     num_workers = 1
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
@@ -88,8 +88,10 @@ if __name__ == "__main__":
 
     batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
 
-    train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
     # validate(model_path=??, batch_size, num_workers, criterion)    
+
+    save_checkpoint(model)
 
     
 

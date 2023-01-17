@@ -49,3 +49,5 @@ def train(model, trainloader, testloader, criterion, optimizer=None, epochs=5, p
                 
                 # Make suredropout and grads are on for training
                 model.train()
+    
+    return model
