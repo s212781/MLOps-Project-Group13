@@ -77,7 +77,7 @@ target/
 
 # exclude data from source control by default
 /data/
-
+/wandb/
 # Mac OS-specific storage files
 .DS_Store
 
@@ -87,3 +87,6 @@ target/
 
 # Mypy cache
 .mypy_cache/
+/data
+/old scripts
+

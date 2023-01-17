@@ -1,0 +1,13 @@
+# docker stuff 
+docker build -f .\dockerfile.dockerfile . -t project_docker:latest
+docker tag project_docker gcr.io/dtumlops-374307/project_docker
+docker push gcr.io/dtumlops-374307/project_docker
+
+# create container instance with image
+gcloud compute instances create-with-container instance-2 --project=dtumlops-374307 --zone=europe-west4-b --machine-type=n1-standard-4 --accelerator="count=1,type=nvidia-tesla-t4" --container-image=gcr.io/dtumlops-374307/project_docker --maintenance-policy TERMINATE --restart-on-failure
+gcloud beta compute ssh <instance-name>
+
+#start container instance
+gcloud compute instances start instance-1 --zone=europe-west4-b 
+#connect to instance
+gcloud beta compute ssh instance-1 
