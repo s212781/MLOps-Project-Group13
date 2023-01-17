@@ -1,7 +1,6 @@
 import torch
 from torch import optim, nn
 import torchvision.models as models
-import timm
 from src.features.build_features import MyAwesomeModel as Mymodel
 from src.models import train_model, predict_model
 from torchvision.datasets import ImageFolder
@@ -33,12 +32,12 @@ def validate(model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model_ft = timm.create_model('resnex101_328d', pretrained=True, num_classes=120)
-    num_ftrs = model_ft.fc.in_features
+    model = models.resnet152(models.ResNet152_Weights.DEFAULT, pretrained=True)
+    num_ftrs = model.fc.in_features
+    
+    model.fc = nn.Linear(num_ftrs, 120)
    
-    model_ft.fc = nn.Linear(num_ftrs, 120)
-
-    return model_ft
+    return model
 
 def train_params():
     bs = 64
