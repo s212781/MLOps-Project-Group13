@@ -11,3 +11,6 @@ gcloud beta compute ssh <instance-name>
 gcloud compute instances start instance-1 --zone=europe-west4-b 
 #connect to instance
 gcloud beta compute ssh instance-1 
+
+
+
