@@ -55,25 +55,12 @@ def load_data():
     random_seed = 45
     torch.manual_seed(random_seed);
 
-    test_pct = 0.3
-    test_size = int(len(dataset)*test_pct)
-    dataset_size = len(dataset) - test_size
+    val_pct = 0.3
+    val_size = int(len(dataset)*val_pct)
+    train_size = len(dataset) - val_size
 
-    val_pct = 0.1
-    val_size = int(dataset_size*val_pct)
-    train_size = dataset_size - val_size
-
-    train_ds, val_ds, test_ds = random_split(dataset, [train_size, val_size, test_size])
-    # random_seed = 45
-    # torch.manual_seed(random_seed);
-
-    # val_pct = 0.3
-    # val_size = int(len(dataset)*val_pct)
-    # dataset_size = len(dataset) - val_size
-
-    # train_size = dataset_size - val_size
-
-    # train_ds, val_ds = random_split(dataset, [train_size, val_size])
+    train_ds, val_ds = random_split(dataset, [train_size, val_size])
+  
 
     train_dataset = MyDataset(train_ds, train_transform())
     val_dataset = MyDataset(val_ds, val_transform())
