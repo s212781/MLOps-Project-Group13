@@ -16,7 +16,6 @@ COPY data.dvc src/data.dvc
 COPY .dvc/ code/.dvc/
 COPY main.py code/main.py
 
-ENTRYPOINT ["python", "-u", "code/src/models/train_model.py"]
 
 # RUN apt-get -y update; apt-get -y install curl
 
@@ -34,3 +33,5 @@ ENTRYPOINT ["python", "-u", "code/src/models/train_model.py"]
 # RUN gcloud auth configure-docker
 
 RUN pip install -r code/requirements.txt --no-cache-dir
+
+ENTRYPOINT ["python", "-u", "code/main.py"]

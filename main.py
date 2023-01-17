@@ -61,7 +61,6 @@ def load_data():
 
     train_ds, val_ds = random_split(dataset, [train_size, val_size])
   
-
     train_dataset = MyDataset(train_ds, train_transform())
     val_dataset = MyDataset(val_ds, val_transform())
 
