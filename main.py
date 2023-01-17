@@ -33,13 +33,12 @@ def validate(model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model = timm.create_model('resnet50', pretrained=True, num_classes=120)
-    # model = models.resnet152(pretrained=True)
-    # num_ftrs = model.fc.in_features
-    
-    # model.fc = nn.Linear(num_ftrs, 120)
+    model_ft = timm.create_model('resnet50', pretrained=True, num_classes=120)
+    num_ftrs = model_ft.fc.in_features
    
-    return model
+    model_ft.fc = nn.Linear(num_ftrs, 120)
+
+    return model_ft
 
 def train_params():
     bs = 64
