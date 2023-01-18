@@ -41,15 +41,13 @@ def create_model():
     return model
 
 @hydra.main(config_path="config", config_name='config.yaml')
-def train_params():
+def train_params(config):
     hparams = config.experiment
-    bs = 64
-    lr  = 0.001
-    epochs = 3
-    num_workers = 1
+    bs = hparams["batch_size"]
+    epochs = hparams["epochs"]
+    num_workers = hparams["num_workers"]
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-    print(cfg.hyperparameters.batch_size, cfg.hyperparameters.learning_rate)   
+    optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"]) 
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
