@@ -3,6 +3,14 @@ from torchvision.datasets import ImageFolder
 
 
 def test_data():
+    """
+    Test data for model training.
+
+    Checking:
+    - image mode
+    - label
+    - dataset length
+    """
 
     currentfolder = os.getcwd()
     dataset = ImageFolder(currentfolder + "/data/processed/images")
