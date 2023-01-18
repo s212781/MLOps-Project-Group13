@@ -47,6 +47,11 @@ RUN apt update && \
 
 COPY requirements.txt requirements.txt
 COPY main.py main.py
+COPY src/ src/
+COPY data.dvc data.dvc
+COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
+COPY .dvc .dvc
+
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 
