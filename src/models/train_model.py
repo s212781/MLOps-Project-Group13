@@ -1,5 +1,4 @@
 import torch
-from src.models.predict_model import validation
 
 
 def train(
