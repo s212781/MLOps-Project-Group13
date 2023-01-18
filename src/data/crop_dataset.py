@@ -22,7 +22,7 @@ for dirpath, dirnames, filenames in os.walk(src_dir):
     # looops through images
     for i in range(len(filenames)):
         # Finding the matching xml file
-        breed_id = dirpath[dirpath.find("n0") :]
+        breed_id = dirpath[dirpath.find("n0"):]
 
         # create directory
         breed_folder = save_dir + "/" + breed_id
@@ -61,10 +61,10 @@ for dirpath, dirnames, filenames in os.walk(src_dir):
                 strng.append(lines[idx + i + 1])
 
         # assigning values
-        xmin = int(strng[0][strng[0].find("<xmin>") + 6 : strng[0].find("</xmin>")])
-        xmax = int(strng[2][strng[2].find("<xmax>") + 6 : strng[2].find("</xmax>")])
-        ymin = int(strng[1][strng[1].find("<ymin>") + 6 : strng[1].find("</ymin>")])
-        ymax = int(strng[3][strng[3].find("<ymax>") + 6 : strng[3].find("</ymax>")])
+        xmin = int(strng[0][strng[0].find("<xmin>") + 6: strng[0].find("</xmin>")])
+        xmax = int(strng[2][strng[2].find("<xmax>") + 6: strng[2].find("</xmax>")])
+        ymin = int(strng[1][strng[1].find("<ymin>") + 6: strng[1].find("</ymin>")])
+        ymax = int(strng[3][strng[3].find("<ymax>") + 6: strng[3].find("</ymax>")])
 
         # cropping image
         crop_img = img[ymin:ymax, xmin:xmax]

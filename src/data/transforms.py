@@ -14,4 +14,4 @@ def train_transform():
 
 
 def val_transform():
-    return transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(),])
+    return transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), ])

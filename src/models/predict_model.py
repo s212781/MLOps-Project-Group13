@@ -18,7 +18,7 @@ def validation(model, testloader, criterion):
         output = model.forward(images)
         test_loss += criterion(output, labels).item()
 
-        ## Calculating the accuracy
+        # Calculating the accuracy
         # Model's output is log-softmax, take exponential to get the probabilities
         ps = torch.exp(output)
         pred = ps.max(1)[1]
