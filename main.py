@@ -16,12 +16,12 @@ def train(model, batch_size, epochs, num_workers, criterion, optimizer):
 
     train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
 
-def validate(model_path, batch_size, num_workers, criterion):
+def validate(model, model_path, batch_size, num_workers, criterion):
     print("Evaluating...")
     _ , valid_dataset = load_data()
     validloader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    model = load_checkpoint(model_path)
+    model = load_checkpoint(model, model_path)
     model.eval()
                 
     # Turn off gradients for validation, will speed up inference
@@ -65,9 +65,9 @@ def load_data():
 
     return train_dataset, val_dataset
 
-def load_checkpoint(filepath):
-    checkpoint = torch.load(filepath)
-    model = Mymodel()
+def load_checkpoint(model, filepath):
+    checkpoint = torch.load(filepath, map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
+    # model = Mymodel()
     model.load_state_dict(checkpoint['state_dict'])
     
     return model
@@ -82,16 +82,16 @@ def save_checkpoint(model):
 
 if __name__ == "__main__":  
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(device)
+    print("DEVICE", device)
     model = create_model()
     model.to(device)
 
     batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
 
-    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
-    # validate(model_path=??, batch_size, num_workers, criterion)    
+    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
-    save_checkpoint(model)
+    # save_checkpoint(model)
 
     
 
