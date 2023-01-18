@@ -1,6 +1,10 @@
 import os
 from torchvision.datasets import ImageFolder
 
+_TEST_ROOT = os.path.dirname(__file__)  # root of test folder
+_PROJECT_ROOT = os.path.dirname(_TEST_ROOT)  # root of project
+_PATH_DATA = os.path.join(_PROJECT_ROOT, "data")  # root of data
+
 
 def test_data():
     """
@@ -12,8 +16,7 @@ def test_data():
     - dataset length
     """
 
-    currentfolder = os.getcwd()
-    dataset = ImageFolder(currentfolder + "/data/processed/images")
+    dataset = ImageFolder(_PATH_DATA + "/processed/images")
 
     for image, label in dataset:
         assert image.mode == "RGB", "Unexpected image mode"
