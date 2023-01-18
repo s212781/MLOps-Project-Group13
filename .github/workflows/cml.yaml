@@ -19,11 +19,13 @@ jobs:
         # env:
         #   GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
+          # Install requirements
+          pip install -r requirements.txt
+          
           # Pull data & run-cache from S3 and reproduce pipeline
           dvc pull
 
-          # Install requirements
-          pip install -r requirements.txt
+          
 
           python main.py
         
