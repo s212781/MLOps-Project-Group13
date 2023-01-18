@@ -75,6 +75,8 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 3 fill here ---
 
+We used the third party framework Pytorch image models in our project as we decided to work on a computer vision project. We were using the Stanford dogs image dataset to classify different dog breeds which contains 20,850 samples of 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transforms. Then finally to build our deep learning model, we used optim and nn from torch in our project.
+
 ## Coding environment
 
 > In the following section we are interested in learning more about you local development environment.
@@ -93,6 +95,8 @@ s212781, s212383, s212711, s171198, s212488
 > Answer:
 
 --- question 4 fill here ---
+We have created requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements can be find in requirements.txt file, To get a complete copy of our development enviroment, one would have to run the following commands:
+TO BE COMPLETED
 
 ### Question 5
 
@@ -109,6 +113,11 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 5 fill here ---
 
+We have used the cookicutter template in our project to organize our code starting from the very beginning. Cooki cutter is a standardized way of creating project structures. From the cookiecutter template we have filled out the folders and files that we found necessary. These folders are the readme , models, reports, requirements, src(_init_, make_dataset, build_features, predict_model, train_model) and toxi_ini folder. However, some default folders were unnecessary for our implementation . Thus we have removed the notebooks folder, as we did not use any jupyter notebooks in our project. We also removed references folder since it was unrelated with our tasks. 
+We have added an ... folder that contains ... for running our experiments.
+TO BE COMPLETED
+
+
 ### Question 6
 
 > **Did you implement any rules for code quality and format? Additionally, explain with your own words why these**
@@ -119,6 +128,8 @@ s212781, s212383, s212711, s171198, s212488
 > Answer:
 
 --- question 6 fill here ---
+
+We have used flake8 to adjust our code and check that our code is pep8 compliant. We also used docstrings for documentation. We learned and discussed in the course that, a piece of code is written once, but read many times. It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily, when working in a group project. 
 
 ## Version control
 
@@ -132,6 +143,9 @@ s212781, s212383, s212711, s171198, s212488
 > Answer:
 
 --- question 7 fill here ---
+
+We have implemented a data test and a model test.
+
 
 ### Question 8
 
@@ -148,6 +162,10 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 8 fill here ---
 
+We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
+TO BE COMPLETED
+
+
 ### Question 9
 
 > **Did you workflow include using branches and pull requests? If yes, explain how. If not, explain how branches and**
@@ -163,6 +181,8 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 9 fill here ---
 
+During our project development, we used git and Github to collaborate easier and do a proper version control of our code. It helped us keep track of the changes made in the code. We could follow what changes were made, who made them and when they were made. We made use of branches in our project. All of the group members mostly worked on different branches to avoid conflicts when developing simultaneously. Other than the main branch, we had branches dev, model, test, report for different purposes. We also used pull requests, which helped us implement different parts of the code without affecting the main branch.
+
 ### Question 10
 
 > **Did you use DVC for managing data in your project? If yes, then how did it improve your project to have version**
@@ -177,6 +197,10 @@ s212781, s212383, s212711, s171198, s212488
 > Answer:
 
 --- question 10 fill here ---
+
+Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. 
+We did make use of DVC in the following way: ... . In the end it helped us in ... for controlling ... part of our pipeline
+TO BE COMPLETED
 
 ### Question 11
 
@@ -212,6 +236,7 @@ s212781, s212383, s212711, s171198, s212488
 > Answer:
 
 --- question 12 fill here ---
+To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra and config files for our experiments. With Hydra, we can write config files and keep track of our hyperparameters in experiments. This way we can obtain a more clear picture of the model configuration and it becomes easier to do the version control of the configuration.
 
 ### Question 13
 
