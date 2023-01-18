@@ -115,9 +115,7 @@ TO BE COMPLETED*
 --- question 5 fill here ---
 
 We have used the cookicutter template in our project to organize our code starting from the very beginning. Cooki cutter is a standardized way of creating project structures. From the cookiecutter template we have filled out the folders and files that we found necessary. These folders are the readme , models, reports, requirements, src(_init_, make_dataset, build_features, predict_model, train_model) and toxi_ini folder. However, some default folders were unnecessary for our implementation . Thus we have removed the notebooks folder, as we did not use any jupyter notebooks in our project. We also removed references folder since it was unrelated with our tasks. 
-We have added an ... folder that contains ... for running our experiments.
-TO BE COMPLETED*
-
+We haven't added new folders.
 
 ### Question 6
 
@@ -165,7 +163,7 @@ TO BE UPDATED* with recent tests
 --- question 8 fill here ---
 
 We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
-TO BE UPDATED* regarding recent tests
+TO BE UPDATED* regarding recent tests and coverage percent
 
 
 ### Question 9
@@ -240,6 +238,7 @@ TO BE COMPLETED*
 > Answer:
 
 --- question 12 fill here ---
+
 To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra and config files for our experiments. With Hydra, we can write config files and keep track of our hyperparameters in experiments. This way we can obtain a more clear picture of the model configuration and it becomes easier to do the version control of the configuration.
 
 ### Question 13
@@ -360,7 +359,7 @@ TO BE COMPLETED*
 
 --- question 19 fill here ---
 
-![bucket_13.png](figures/<image>.<extension>)
+![bucket_13.png](figures/bucket_13.png)
 
 ### Question 20
 
@@ -371,7 +370,7 @@ TO BE COMPLETED*
 
 --- question 20 fill here ---
 
-![registry_13.png](figures/<image>.<extension>)
+![registry_13.png](figures/registry_13.png)
 
 ### Question 21
 
@@ -381,6 +380,7 @@ TO BE COMPLETED*
 > Answer:
 
 --- question 21 fill here ---
+
 TO BE COMPLETED*
 THE PAGE LOOKS EMPTY FOR US
 
@@ -416,6 +416,8 @@ THE PAGE LOOKS EMPTY FOR US
 
 --- question 23 fill here ---
 
+Monitoring is important after deploying a machine learning model to ensure its durability over time. We did not manage to implement monitoring for our project. We would like to have monitoring implemented such that over time we could keep track of the drift in the data and prevent our model from being useless over time. In our example, the dog breeds and the dogs' appearences will probably remain same, but the image qualities and the picture attributes may change over time and monitoring can help us track these changes and act upon them. We could also benefit from telemetry to check our system daily in a real-life example.
+
 ### Question 24
 
 > **How many credits did you end up using during the project and what service was most expensive?**
@@ -429,6 +431,7 @@ THE PAGE LOOKS EMPTY FOR US
 > Answer:
 
 --- question 24 fill here ---
+
 
 ## Overall discussion of project
 
