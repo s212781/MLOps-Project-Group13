@@ -1,4 +1,5 @@
 import torch
+import hydra
 from torch import optim, nn
 import torchvision.models as models
 from src.features.build_features import MyAwesomeModel as Mymodel
@@ -39,13 +40,16 @@ def create_model():
    
     return model
 
+@hydra.main(config_path="config", config_name='config.yaml')
 def train_params():
+    hparams = config.experiment
     bs = 64
     lr  = 0.001
     epochs = 3
     num_workers = 1
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
+    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+    print(cfg.hyperparameters.batch_size, cfg.hyperparameters.learning_rate)   
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
