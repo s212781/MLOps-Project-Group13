@@ -91,3 +91,4 @@ target/
 /old scripts
 
 /model_v1_0.pth
+*.pth
