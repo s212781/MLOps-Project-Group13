@@ -1,13 +1,13 @@
 # # Base image
-# FROM ubuntu:18.04
+FROM ubuntu:18.04
 
-# # install python
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#     python3.5 \
-#     python3-pip \
-#     && \
-#     apt-get clean && \
-#     rm -rf /var/lib/apt/lists/*
+# install python
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.8 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # WORKDIR /code
 
@@ -38,22 +38,22 @@
 
 # ENTRYPOINT ["python", "-u", "code/inti.sh"]
 
-FROM python:3.8-slim
+# FROM python:3.8-slim
 
-# install python 
-RUN apt update && \
-    apt install --no-install-recommends -y build-essential gcc && \
-    apt clean && rm -rf /var/lib/apt/lists/*
+# # install python 
+# RUN apt update && \
+#     apt install --no-install-recommends -y build-essential gcc && \
+#     apt clean && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt requirements.txt
-COPY main.py main.py
-COPY src/ src/
-COPY data.dvc data.dvc
-COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
-COPY .dvc .dvc
+# COPY requirements.txt requirements.txt
+# COPY main.py main.py
+# COPY src/ src/
+# COPY data.dvc data.dvc
+# COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
+# COPY .dvc .dvc
 
-WORKDIR /
-RUN pip install -r requirements.txt --no-cache-dir
+# WORKDIR /
+# RUN pip install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "main.py"]
+# ENTRYPOINT ["python", "-u", "main.py"]
 
