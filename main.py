@@ -9,21 +9,27 @@ from torch.utils.data import random_split, DataLoader
 from src.data.make_dataset import MyDataset
 from src.data.transforms import train_transform, val_transform
 
-def train(model, batch_size, epochs, num_workers, criterion, optimizer):
+@hydra.main(config_path="config", config_name='config.yaml')
+def train(model, config):
+    hparams = config.experiment
     print("Training...")
     train_dataset, valid_dataset = load_data()
-    trainloader = DataLoader(train_dataset, batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
-    validloader = DataLoader(valid_dataset, batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
+    trainloader = DataLoader(train_dataset, hparams["batch_size"], shuffle=True, pin_memory=True, num_workers=hparams["num_workers"])
+    validloader = DataLoader(valid_dataset, hparams["batch_size"], shuffle=False, pin_memory=True, num_workers=hparams["num_workers"])
 
-    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+    train_model.train(model, trainloader, validloader)
 
-def validate(model, model_path, batch_size, num_workers, criterion):
+@hydra.main(config_path="config", config_name='config.yaml')
+def validate(model, model_path, config):
+    hparams = config.experiment
     print("Evaluating...")
     _ , valid_dataset = load_data()
-    validloader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
+    validloader = DataLoader(dataset=valid_dataset, batch_size=hparams["batch_size"], shuffle=False, pin_memory=True, num_workers=hparams["num_workers"])
 
     model = load_checkpoint(model, model_path)
     model.eval()
+
+    criterion = nn.CrossEntropyLoss()
                 
     # Turn off gradients for validation, will speed up inference
     with torch.no_grad():
@@ -39,16 +45,6 @@ def create_model():
     model.fc = nn.Linear(num_ftrs, 120)
    
     return model
-
-@hydra.main(config_path="config", config_name='config.yaml')
-def train_params(config):
-    hparams = config.experiment
-    bs = hparams["batch_size"]
-    epochs = hparams["epochs"]
-    num_workers = hparams["num_workers"]
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"]) 
-    return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
     dataset = ImageFolder('data/processed/images')
@@ -88,10 +84,8 @@ if __name__ == "__main__":
     model = create_model()
     model.to(device)
 
-    batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
-
-    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
-    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
+    # model = train(model)
+    validate(model, 'model_v1_0.pth')   
 
     # save_checkpoint(model)
 

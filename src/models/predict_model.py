@@ -1,8 +1,13 @@
 import torch
+from torch import nn
+import hydra
 
-def validation(model, testloader, criterion):
+@hydra.main(config_path="config", config_name='config.yaml')
+def validation(model, testloader, config):
+    hparams = config.experiment
     accuracy = 0
     test_loss = 0
+    criterion = nn.CrossEntropyLoss()
 
     for images, labels in testloader:
 

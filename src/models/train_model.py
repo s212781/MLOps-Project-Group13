@@ -1,12 +1,19 @@
 import torch
+from torch import optim, nn
 from src.models.predict_model import validation
+import hydra
 
-def train(model, trainloader, testloader, criterion, optimizer=None, epochs=5, print_every=40):
+@hydra.main(config_path="config", config_name='config.yaml')
+def train(model, trainloader, testloader, config, print_every=40):
+    hparams = config.experiment
     steps = 0
     running_loss = 0
     loss_total = []    
 
-    for e in range(epochs):
+    optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"]) 
+    criterion = nn.CrossEntropyLoss()
+
+    for e in range(hparams["epochs"]):
         # Model in training mode, dropout is on
         model.train()
 
@@ -40,7 +47,7 @@ def train(model, trainloader, testloader, criterion, optimizer=None, epochs=5, p
                 with torch.no_grad():
                     test_loss, accuracy = validation(model, testloader, criterion)
                 
-                print("Epoch: {}/{}.. ".format(e+1, epochs),
+                print("Epoch: {}/{}.. ".format(e+1, hparams["epochs"]),
                       "Training Loss: {:.3f}.. ".format(running_loss/print_every),
                       "Test Loss: {:.3f}.. ".format(test_loss/len(testloader)),
                       "Test Accuracy: {:.3f}".format(accuracy/len(testloader)))
