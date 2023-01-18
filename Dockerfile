@@ -9,16 +9,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# WORKDIR /code
+WORKDIR /code
 
-# COPY requirements.txt code/requirements.txt
-# COPY setup.py code/setup.py
-# COPY src/ code/src/
-# COPY data.dvc src/data.dvc
-# COPY .dvc/ code/.dvc/
-# COPY main.py code/main.py
-# COPY init.sh /code/init.sh
+COPY requirements.txt code/requirements.txt
+COPY setup.py code/setup.py
+COPY src/ code/src/
+COPY data.dvc src/data.dvc
+COPY .dvc/ code/.dvc/
+COPY main.py code/main.py
+COPY init.sh /code/init.sh
 
+CMD ["/bin/bash"]
 # RUN apt-get -y update; apt-get -y install curl
 
 # # Downloading gcloud package
