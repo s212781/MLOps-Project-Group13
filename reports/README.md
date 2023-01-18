@@ -95,8 +95,9 @@ We used the third party framework Pytorch image models in our project as we deci
 > Answer:
 
 --- question 4 fill here ---
+
 We have created requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements can be find in requirements.txt file, To get a complete copy of our development enviroment, one would have to run the following commands:
-TO BE COMPLETED
+TO BE COMPLETED*
 
 ### Question 5
 
@@ -115,7 +116,7 @@ TO BE COMPLETED
 
 We have used the cookicutter template in our project to organize our code starting from the very beginning. Cooki cutter is a standardized way of creating project structures. From the cookiecutter template we have filled out the folders and files that we found necessary. These folders are the readme , models, reports, requirements, src(_init_, make_dataset, build_features, predict_model, train_model) and toxi_ini folder. However, some default folders were unnecessary for our implementation . Thus we have removed the notebooks folder, as we did not use any jupyter notebooks in our project. We also removed references folder since it was unrelated with our tasks. 
 We have added an ... folder that contains ... for running our experiments.
-TO BE COMPLETED
+TO BE COMPLETED*
 
 
 ### Question 6
@@ -145,6 +146,7 @@ We have used flake8 to adjust our code and check that our code is pep8 compliant
 --- question 7 fill here ---
 
 We have implemented a data test and a model test.
+TO BE UPDATED* with recent tests
 
 
 ### Question 8
@@ -163,7 +165,7 @@ We have implemented a data test and a model test.
 --- question 8 fill here ---
 
 We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
-TO BE COMPLETED
+TO BE UPDATED* regarding recent tests
 
 
 ### Question 9
@@ -200,7 +202,7 @@ During our project development, we used git and Github to collaborate easier and
 
 Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. 
 We did make use of DVC in the following way: ... . In the end it helped us in ... for controlling ... part of our pipeline
-TO BE COMPLETED
+TO BE COMPLETED* regarding DVC usage
 
 ### Question 11
 
@@ -217,6 +219,8 @@ TO BE COMPLETED
 > Answer:
 
 --- question 11 fill here ---
+
+TO BE COMPLETED*
 
 ## Running code and tracking experiments
 
@@ -253,6 +257,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 13 fill here ---
 
+For the reproducibility of our experiments, we made use of config files and Hydra. We can store our hyperparameters for the model in config files and distinguish them for each experiment performed. Whenever an experiment is run the following happens: Hydra writes the results to a folder called outputs, in a sub folder with the time logs of the experiment. This way we can follow each experiment performed. This way we make sure that no information is lost. To reproduce an experiment one would have to run the main script by adjusting it to the relative config file of the experiment. 
+
 ### Question 14
 
 > **Upload 1 to 3 screenshots that show the experiments that you have done in W&B (or another experiment tracking**
@@ -270,6 +276,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 14 fill here ---
 
+TO BE COMPLETED*
+
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
@@ -285,6 +293,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 15 fill here ---
 
+TO BE COMPLETED*
+
 ### Question 16
 
 > **When running into bugs while trying to run your experiments, how did you perform debugging? Additionally, did you**
@@ -299,6 +309,10 @@ To configure our experiments, we needed to use a structure to keep track of and 
 > Answer:
 
 --- question 16 fill here ---
+
+Debugging is important to find what is wrong in our code and determine how it can be fixed. For debugging, we mostly used the python debugger for visual studio code debugger. We benefited from using breakpoints to debug our code by running it in debug mode. We can perform many different operations such as step into, step over and step out to run the code step by step and this way it becomes easier to figure out the problems in our code. Profiling can help us optimize our code. We can do this by searching for bottlenecks and speeding up our code using profilers. 
+TO BE COMPLETED* in case we used profiling.
+
 
 ## Working in the cloud
 
@@ -317,6 +331,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 17 fill here ---
 
+We used the following two services: Virtual Machine and Bucket. A virtual machine is an instance of a computer in the cloud. We can run applications and programs as if it were in our local computers. A bucket is used for data storage in google cloud platform services, which are associated with our project. We used it to store our dataset in the cloud.
+
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
@@ -332,6 +348,9 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 18 fill here ---
 
+TO BE COMPLETED*
+
+
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
@@ -340,6 +359,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 > Answer:
 
 --- question 19 fill here ---
+
+![bucket_13.png](figures/<image>.<extension>)
 
 ### Question 20
 
@@ -350,6 +371,8 @@ To configure our experiments, we needed to use a structure to keep track of and 
 
 --- question 20 fill here ---
 
+![registry_13.png](figures/<image>.<extension>)
+
 ### Question 21
 
 > **Upload one image of your GCP cloud build history, so we can see the history of the images that have been build in**
@@ -358,6 +381,9 @@ To configure our experiments, we needed to use a structure to keep track of and 
 > Answer:
 
 --- question 21 fill here ---
+TO BE COMPLETED*
+THE PAGE LOOKS EMPTY FOR US
+
 
 ### Question 22
 
