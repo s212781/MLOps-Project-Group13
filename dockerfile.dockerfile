@@ -1,11 +1,13 @@
 # Base image
-FROM python:3.8-slim
+FROM ubuntu:18.04
 
 # install python
-RUN apt update && \
-    apt install --no-install-recommends -y build-essential gcc && \
-    apt clean && rm -rf /var/lib/apt/lists/* \
-    python-pip
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.5 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /code
 
@@ -15,7 +17,7 @@ COPY src/ code/src/
 COPY data.dvc src/data.dvc
 COPY .dvc/ code/.dvc/
 COPY main.py code/main.py
-
+COPY init.sh /code/init.sh
 
 # RUN apt-get -y update; apt-get -y install curl
 
@@ -32,6 +34,6 @@ COPY main.py code/main.py
 
 # RUN gcloud auth configure-docker
 
-RUN pip install -r code/requirements.txt --no-cache-dir
+RUN pip3 install -r code/requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "code/main.py"]
+ENTRYPOINT ["python", "-u", "code/inti.sh"]

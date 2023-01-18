@@ -7,6 +7,7 @@ from torchvision.datasets import ImageFolder
 from torch.utils.data import random_split, DataLoader
 from src.data.make_dataset import MyDataset
 from src.data.transforms import train_transform, val_transform
+import subprocess
 
 def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     print("Training...")
@@ -67,7 +68,6 @@ def load_data():
 
 def load_checkpoint(model, filepath):
     checkpoint = torch.load(filepath, map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
-    # model = Mymodel()
     model.load_state_dict(checkpoint['state_dict'])
     
     return model
@@ -80,7 +80,9 @@ def save_checkpoint(model):
 
     torch.save(checkpoint, 'model_v1_0.pth')
 
-if __name__ == "__main__":  
+if __name__ == "__main__": 
+    #lets use subprocess to import data
+    subprocess.run((["dvc pull"]), shell=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("DEVICE", device)
     model = create_model()
