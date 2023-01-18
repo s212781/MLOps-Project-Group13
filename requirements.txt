@@ -10,3 +10,5 @@ awscli==1.27.38
 dvc[gs]
 pandas
 numpy
+torchvision
+
