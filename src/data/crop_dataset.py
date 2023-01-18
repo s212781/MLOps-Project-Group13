@@ -2,7 +2,6 @@
 # Script to crop the images so that only the dogs will be shown in the data #
 #############################################################################
 
-from PIL import Image
 import os
 import cv2
 

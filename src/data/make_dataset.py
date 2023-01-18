@@ -1,7 +1,6 @@
 # ##################################################################
 # # Script to convert data to something the frameworks can work with#
 # ###################################################################
-import numpy as np
 from torch.utils.data import Dataset
 
 """ Using corrupted dataset """
