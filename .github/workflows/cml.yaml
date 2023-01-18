@@ -19,7 +19,6 @@ jobs:
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
-          gcloud auth login
           # Install requirements
           # pip install -r requirements.txt
 
