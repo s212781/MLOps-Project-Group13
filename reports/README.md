@@ -339,10 +339,7 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 >
 > Answer:
 
---- question 21 fill here ---
-
-TO BE COMPLETED*
-THE PAGE LOOKS EMPTY FOR US
+![history.png](figures/history.jpeg)
 
 
 ### Question 22
