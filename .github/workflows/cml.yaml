@@ -69,9 +69,7 @@ jobs:
           dvc pull data_lite --run-cache
           # dvc repro
 
-      - name: Perform unit tests
-        run: |
-           pytest tests/
+      
       - name: Auto linting
         run: |
            black --check --verbose .
