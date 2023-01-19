@@ -19,7 +19,7 @@ WORKDIR /root
 COPY requirements.txt requirements.txt
 COPY src/ src/
 COPY .dvc/config .dvc/config
-COPY data_lite.dvc data_lite.dvc
+COPY data.dvc data.dvc
 COPY entrypoint.sh entrypoint.sh
 COPY models/ models/
 COPY main.py main.py
