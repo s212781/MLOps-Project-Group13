@@ -1,19 +1,18 @@
 import torch
 from torch import optim, nn
 from src.models.predict_model import validation
-import hydra
+import wandb
 
-@hydra.main(config_path="config", config_name='config.yaml')
-def train(model, trainloader, testloader, config, print_every=40):
-    hparams = config.experiment
+
+def train(model, trainloader, testloader, criterion, optimizer, epochs, print_every=40):
     steps = 0
     running_loss = 0
     loss_total = []    
 
-    optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"]) 
-    criterion = nn.CrossEntropyLoss()
+    wandb.init(project="MLOpsG13")
+    wandb.watch(model, log_freq=100)
 
-    for e in range(hparams["epochs"]):
+    for e in range(epochs):
         # Model in training mode, dropout is on
         model.train()
 
@@ -33,6 +32,7 @@ def train(model, trainloader, testloader, config, print_every=40):
             output = model.forward(images)
             # print(output.shape)
             loss = criterion(output, labels)
+            
             # print(loss)
             loss.backward()
             optimizer.step()
@@ -40,14 +40,17 @@ def train(model, trainloader, testloader, config, print_every=40):
             running_loss += loss.item()
             loss_total.append(loss.item())
             if steps % print_every == 0:
+                wandb.log({"loss": loss})
                 # Model in inference mode, dropout is off
                 model.eval()
                 
                 # Turn off gradients for validation, will speed up inference
                 with torch.no_grad():
                     test_loss, accuracy = validation(model, testloader, criterion)
+                    wandb.log({"test_loss": test_loss})
+                    wandb.log({"accuracy": accuracy})
                 
-                print("Epoch: {}/{}.. ".format(e+1, hparams["epochs"]),
+                print("Epoch: {}/{}.. ".format(e+1, epochs),
                       "Training Loss: {:.3f}.. ".format(running_loss/print_every),
                       "Test Loss: {:.3f}.. ".format(test_loss/len(testloader)),
                       "Test Accuracy: {:.3f}".format(accuracy/len(testloader)))
@@ -58,3 +61,8 @@ def train(model, trainloader, testloader, config, print_every=40):
                 model.train()
     
     return model
+
+
+
+
+
