@@ -20,6 +20,7 @@ COPY requirements.txt requirements.txt
 COPY src/ src/
 COPY .dvc/config .dvc/config
 COPY data.dvc data.dvc
+COPY .git .git
 COPY entrypoint.sh entrypoint.sh
 COPY models/ models/
 COPY main.py main.py
