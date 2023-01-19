@@ -75,7 +75,7 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 3 fill here ---
 
-We used the third party framework Pytorch image models in our project as we decided to work on a computer vision project. We were using the Stanford dogs image dataset to classify different dog breeds which contains 20,850 samples of 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transforms on the images. Then finally to build our deep learning model, we used optim and nn modules from torch in our project.
+We used the third party framework Pytorch Image Models (TIMM) in our project as we decided to work on a computer vision project. From this framework we used the resnet152 model with its updated pretrained weights. To this model, we then added a fully connected layer at the end with dimension 120 since we are using the Stanford dogs image dataset to classify 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transformations on the images. Then finally to build our deep learning model, we used optim and nn modules from torch in our project.
 
 ## Coding environment
 
