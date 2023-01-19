@@ -34,14 +34,7 @@ name: model-training
 on: [push]
 jobs:
   run:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ["3.9", "3.10"]
-        pytorch-version: ["1.11.0", "1.12.0"]
-
+    runs-on: ubuntu-latest
     container: ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
       contents: 'read'
@@ -58,31 +51,17 @@ jobs:
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
 
   
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
         with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
+          path: ~/.cache
+          key: ${{ hashFiles('**/requirements.txt') }}
 
       - name: Install requirements
         run: |
           #  Install requirements
           pip install -r requirements.txt
 
-      - name: Pull data 
-        run: |
-          # git config --global --add safe.directory /__w/DTU_MLops_M21_docker_example/DTU_MLops_M21_docker_example
       
-          # Pull data & run-cache from S3 and reproduce pipeline
-          dvc pull data_lite --run-cache
-          # dvc repro
 
       
 
