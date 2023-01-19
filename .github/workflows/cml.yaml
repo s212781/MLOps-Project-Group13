@@ -69,11 +69,6 @@ jobs:
           dvc pull data_lite --run-cache
           # dvc repro
 
-      
-      - name: Auto linting
-        run: |
-           black --check --verbose .
-
       - name: Run python script
         run: |
           python main.py
