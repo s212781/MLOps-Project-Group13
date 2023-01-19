@@ -1,10 +1,16 @@
-# Base image
-FROM python:3.10-slim
+# # Base image
+FROM ubuntu:18.04
 
 # install python
-RUN apt update && \
-    apt install --no-install-recommends -y build-essential gcc && \
-    apt clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.8 \
+    python3-pip \
+    python3-setuptools \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /
 
 # git is needed to run DVC as we use git for version control
 RUN apt-get update && apt-get install -y git
