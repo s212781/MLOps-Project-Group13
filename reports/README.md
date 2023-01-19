@@ -73,8 +73,6 @@ s212781, s212383, s212711, s171198, s212488
 >
 > Answer:
 
---- question 3 fill here ---
-
 For our project, we used the third party framework Pytorch Image Models (TIMM) since we decided to work on a computer vision project. From this framework we used the resnet152 model with its updated pretrained weights. We then added a fully connected layer at the end with dimension 120 since we are using the Stanford dogs image dataset which contains over 20000 dog samples for a total of 120 different dog breeds which is our number of classes. The selected framework is part of fast.ai and the hugging face ecosystem and it was used in order to be able to use a standard pre trained model in a quick and efficient way in order to pay attention to what really matters which is the pipeline and not the model deployment.
 
 ## Coding environment
@@ -94,11 +92,9 @@ For our project, we used the third party framework Pytorch Image Models (TIMM) s
 >
 > Answer:
 
---- question 4 fill here ---
-
-To provide an easier setup for the development and contribution process, we have created requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements to run our code can be find in requirements.txt file located in the main project folder. To get a complete copy of our development enviroment, one would have to run the following commands: 
+To provide an easier setup for the development and contribution process, we have created a requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements to run our code can be found in the mentioned requirements.txt file located in the main project folder. To get a complete copy of our development enviroment, one would have to run the following commands: 
 git clone https://github.com/s212781/MLOps-Project-Group13.git, pip install -r requirements.txt
-This way the user will be ready to copy the evironment to the local computer and be able to contribute to the project development.
+This way the user will be ready to copy the evironment to the local computer and be able to contribute to the project development. If wished, the user could also create a new anaconda environment into which install the requirements.txt in order not to mess with the existing dependencies on his computer.
 
 ### Question 5
 
