@@ -5,7 +5,7 @@ from src.models.predict_model import validation
 import wandb
 
 
-
+#W&B Sweep configuration.
 sweep_configuration = {
     'method': 'random',
     'name': 'sweep',
@@ -14,7 +14,7 @@ sweep_configuration = {
         'name': 'test_loss'
 		},
     'parameters': {
-        'batch_size': {'values': [64, 128, 256]},
+        'batch_size': {'values': [32, 64, 128]},
         'epochs': {'values': [2, 5, 10]},
         'lr': {'max': 0.1, 'min': 0.0001}
      }
@@ -35,6 +35,7 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs, print_ev
 
     for e in range(epochs):
         # Model in training mode, dropout is on
+        wandb.log({"epochs": epochs})
         model.train()
 
         for images, labels in trainloader:
