@@ -25,9 +25,6 @@ COPY entrypoint.sh entrypoint.sh
 COPY models/ models/
 COPY main.py main.py
 
-RUN apt-get -y install curl
-RUN curl https://raw.githubusercontent.com/GoogleCloudPlatform/compute-gpu-installation/main/linux/install_gpu_driver.py --output install_gpu_driver.py
-RUN python3 install_gpu_driver.py
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install wandb
 RUN pip install dvc
