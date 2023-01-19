@@ -36,11 +36,18 @@ jobs:
   run:
     runs-on: ubuntu-latest
     container: ghcr.io/iterative/cml:0-dvc2-base1
+    permissions:
+      contents: 'read'
+      id-token: 'write'
     steps:
       - uses: actions/checkout@v3
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
       - name: Train model
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         run: |
           git config --global --add safe.directory /__w/DTU_MLops_M21_docker_example/DTU_MLops_M21_docker_example
           # Install requirements
