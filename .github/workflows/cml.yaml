@@ -50,10 +50,8 @@ jobs:
           workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
 
-
-      - name: Cache Dependencies
-        uses: actions/cache@v3
-        id: cache
+  
+      - uses: actions/cache@v3
         with:
           path: ${{ env.pythonLocation }}
           key: ${{ env.pythonLocation }}-${{ hashFiles('**/requirements.txt') }}
