@@ -280,8 +280,6 @@ TO BE COMPLETED*
 >
 > Answer:
 
---- question 16 fill here ---
-
 Debugging is important to find what is wrong in our code and determine how it can be fixed. For debugging, we mostly used the python debugger for visual studio code debugger. We benefited from using breakpoints to debug our code by running it in debug mode. We can perform many different operations such as step into, step over and step out to run the code step by step and this way it becomes easier to figure out the problems in our code. Profiling can help us optimize our code. We can do this by searching for bottlenecks and speeding up our code using profilers, however we did not manage to do this step since we prioratized others. 
 
 
