@@ -42,24 +42,25 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
-      - id: 'auth'
+        id: 'auth'
 
-      - name: Get pip cache dir
-        id: pip-cache-dir
-        run: |
-            echo "::set-output name=dir::$(pip cache dir)"
-      - name: Restore pip cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.pip-cache-dir.outputs.dir }}
-          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
-
-      
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
           workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
+
+
+      - name: Get pip cache dir
+        id: pip-cache-dir
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+      - name: Restore pip cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+
       - name: Install requirements
         run: |
           #  Install requirements
