@@ -82,7 +82,7 @@ def save_checkpoint(model):
 
 if __name__ == "__main__": 
     #lets use subprocess to import data
-    subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13'"]), shell=True)
+    subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("DEVICE", device)
     model = create_model()
