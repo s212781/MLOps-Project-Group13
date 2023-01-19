@@ -10,18 +10,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-WORKDIR /code
+WORKDIR /
 
-COPY requirements.txt code/requirements.txt
-COPY src/ code/src/
-COPY data.dvc code/data.dvc
-COPY .dvc/ code/.dvc/
-COPY main.py code/main.py
-COPY model_v1_0.pth.dvc code/model_v1_0.pth.dvc
+COPY requirements.txt requirements.txt
+COPY src/ src/
+COPY data.dvc data.dvc
+COPY .dvc/ .dvc/
+COPY main.py main.py
+COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
 RUN python3 -m pip install -U pip
-RUN pip3 install -r code/requirements.txt --no-cache-dir
+RUN pip3 install -r requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python3", "-u", "code/main.py"]
+ENTRYPOINT ["python3", "-u", "main.py"]
 
 
 # RUN apt-get -y update; apt-get -y install curl
