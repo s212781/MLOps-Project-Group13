@@ -30,7 +30,7 @@ COPY .git .git
 COPY entrypoint.sh entrypoint.sh
 COPY models/ models/
 COPY main.py main.py
-
+RUN pip3 install multidict
 RUN pip3 install -r requirements.txt --no-cache-dir
 RUN pip3 install wandb
 RUN pip3 install dvc
