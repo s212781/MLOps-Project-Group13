@@ -7,9 +7,13 @@ import wandb
 def train(model, trainloader, testloader, criterion, optimizer, epochs, print_every=40):
     steps = 0
     running_loss = 0
-    loss_total = []    
+    loss_total = []
 
     wandb.init(project="MLOpsG13")
+    sweep_id = wandb.sweep(sweep="sweep.yaml", project="project-MLOpsG13")
+
+    wandb.agent(sweep_id, function=train, count=4)
+
     wandb.watch(model, log_freq=100)
 
     for e in range(epochs):
@@ -20,49 +24,46 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs, print_ev
             steps += 1
             images = images.float()
             labels = labels.long()
-            
+
             if torch.cuda.is_available():
                 images = images.cuda()
                 labels = labels.cuda()
-                
+
             # print(images.shape)
             # print(labels)
             optimizer.zero_grad()
-            
+
             output = model.forward(images)
             # print(output.shape)
             loss = criterion(output, labels)
-            
+
             # print(loss)
             loss.backward()
             optimizer.step()
-            
+
             running_loss += loss.item()
             loss_total.append(loss.item())
             if steps % print_every == 0:
                 wandb.log({"loss": loss})
                 # Model in inference mode, dropout is off
                 model.eval()
-                
+
                 # Turn off gradients for validation, will speed up inference
                 with torch.no_grad():
-                    test_loss, accuracy = validation(model, testloader, criterion)
+                    test_loss, accuracy = validation(
+                        model, testloader, criterion)
                     wandb.log({"test_loss": test_loss})
                     wandb.log({"accuracy": accuracy})
-                
+
                 print("Epoch: {}/{}.. ".format(e+1, epochs),
-                      "Training Loss: {:.3f}.. ".format(running_loss/print_every),
+                      "Training Loss: {:.3f}.. ".format(
+                          running_loss/print_every),
                       "Test Loss: {:.3f}.. ".format(test_loss/len(testloader)),
                       "Test Accuracy: {:.3f}".format(accuracy/len(testloader)))
-                                    
+
                 running_loss = 0
-                
+
                 # Make suredropout and grads are on for training
                 model.train()
-    
+
     return model
-
-
-
-
-
