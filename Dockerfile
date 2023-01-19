@@ -5,13 +5,14 @@ FROM ubuntu:20.04
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.8 \
     python3-pip \
+
     python3-setuptools \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
-
+RUN pip3 install --upgrade pip
 # git is needed to run DVC as we use git for version control
 RUN apt-get update && apt-get install -y git
 
