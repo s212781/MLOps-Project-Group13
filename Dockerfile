@@ -5,6 +5,7 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.8 \
     python3-pip \
+    python3-setuptools \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -18,7 +19,6 @@ COPY .dvc/ code/.dvc/
 COPY main.py code/main.py
 COPY model_v1_0.pth.dvc code/model_v1_0.pth.dvc
 RUN python3 -m pip install -U pip
-RUN apt-get install python3-setuptools
 RUN pip3 install -r code/requirements.txt --no-cache-dir
 
 ENTRYPOINT ["python", "-u", "code/main.py"]
