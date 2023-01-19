@@ -12,14 +12,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /code
 
 COPY requirements.txt code/requirements.txt
-COPY setup.py code/setup.py
 COPY src/ code/src/
-COPY data.dvc src/data.dvc
+COPY data.dvc code/data.dvc
 COPY .dvc/ code/.dvc/
 COPY main.py code/main.py
-COPY init.sh /code/init.sh
+COPY model_v1_0.pth.dvc code/model_v1_0.pth.dvc
 
-CMD ["/bin/bash"]
+ENTRYPOINT ["python", "-u", "code/main.py"]
+
+
 # RUN apt-get -y update; apt-get -y install curl
 
 # # Downloading gcloud package
@@ -56,5 +57,4 @@ CMD ["/bin/bash"]
 # WORKDIR /
 # RUN pip install -r requirements.txt --no-cache-dir
 
-# ENTRYPOINT ["python", "-u", "main.py"]
 
