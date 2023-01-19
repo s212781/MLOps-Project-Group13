@@ -39,11 +39,11 @@ def validate(model, model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model = models.resnet152(pretrained=True)
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Linear(num_ftrs, 120)
+    # model = models.resnet152(pretrained=True)
+    # num_ftrs = model.fc.in_features
+    # model.fc = nn.Linear(num_ftrs, 120)
     # this is the given configuration for the 'tiny' model
-    # model = Mymodel()
+    model = Mymodel()
     return model
 
 def train_params():
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     
     validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
-    # save_checkpoint(model)
+    save_checkpoint(model)
   
 
 
