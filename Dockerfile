@@ -27,7 +27,6 @@ RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install wandb
 RUN pip install dvc
 RUN pip install dvc[gs]
-RUN pip install -e .
 RUN ls
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
