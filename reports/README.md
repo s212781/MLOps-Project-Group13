@@ -246,7 +246,7 @@ For the reproducibility of our experiments, we made use of config files and Hydr
 >
 > Answer:
 
-Through Weights & Biases (W&B) we have tracked some variables such as the train and validation loss and the accuracy. These were tracked through a very simple wandb.log and help the user follow the model's behaviour. At the same time, we also did hyperparameter sweeping where we define in a dictionary the metric of interest: validation loss and that we want to minimizing. Then we define the parameters we are going to sweep through, in other words we are going to try different values for batch size, epochs and learning rate in order to minimize the validation loss. All this is done through the wandb sweep utility function.
+Through Weights & Biases (W&B) we have been able to track some variables. This includes variables such as the training loss, the validation loss and the accuracy. These were tracked through a very simple wandb.log which manages to plot the different varaibles in different graphs. These three are important to observe since they help the user follow the model's behaviour. We wish for the losses to converge to 0 whilst the accuracy increases. Another varaible followed is the number of epochs to be able to track at which stae the training of the model is. At the same time, we also did hyperparameter sweeping where we define in a dictionary the metric of interest to follow; this being the validation loss for example. When sweeping you have to define that you wish to minimize such variable (since we are talking of loss) by using the bayes method. Then we define the parameters we are going to sweep through. In other words, we are going to try different values for batch size, epochs and learning rate in order to minimize the validation loss. All this is done through the wandb sweep utility function. Some of these example plots are shown in the screenshots below:
 
 ![sweep.png](figures/sweep.PNG)
 
@@ -388,7 +388,7 @@ Monitoring is important after deploying a machine learning model to ensure its d
 >
 > Answer:
 
---- question 24 fill here ---
+At the end, almost 60$ of credit was used with most of it going to the Compute Engine and some for the Cloud Storage. Other services also used up some credit but not that significant.
 
 
 ## Overall discussion of project
