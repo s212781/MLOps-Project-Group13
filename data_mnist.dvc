@@ -1,0 +1,5 @@
+outs:
+- md5: 71d6b3d645cb27b22e77ad5cd6e43f26.dir
+  size: 282606903
+  nfiles: 9
+  path: data_mnist
