@@ -47,17 +47,28 @@ jobs:
         with:
           workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
+      - name: Install requirements
+        run: |
+          #  Install requirements
+          pip install -r requirements.txt
+
       - name: Pull data 
         run: |
           # git config --global --add safe.directory /__w/DTU_MLops_M21_docker_example/DTU_MLops_M21_docker_example
-          # Install requirements
-          pip install -r requirements.txt
-
+      
           # Pull data & run-cache from S3 and reproduce pipeline
           dvc pull data_lite --run-cache
           # dvc repro
-          
+
+      - name: Perform unit tests
+        run: |
+           pytest tests/tagifai
+      - name: Auto linting
+        run: |
+           black --check --verbose .
+
       - name: Run python script
         run: |
           python main.py
+
      
