@@ -6,19 +6,19 @@ import wandb
 
 
 #W&B Sweep configuration.
-sweep_configuration = {
-    'method': 'random',
-    'name': 'sweep',
-    'metric': {
-        'goal': 'minimize', 
-        'name': 'test_loss'
-		},
-    'parameters': {
-        'batch_size': {'values': [32, 64, 128]},
-        'epochs': {'values': [2, 5, 10]},
-        'lr': {'max': 0.1, 'min': 0.0001}
-     }
-}
+# sweep_configuration = {
+#     'method': 'random',
+#     'name': 'sweep',
+#     'metric': {
+#         'goal': 'minimize', 
+#         'name': 'test_loss'
+# 		},
+#     'parameters': {
+#         'batch_size': {'values': [32, 64, 128]},
+#         'epochs': {'values': [2, 5, 10]},
+#         'lr': {'max': 0.1, 'min': 0.0001}
+#      }
+# }
 
 def train(model, trainloader, testloader, criterion, optimizer, epochs, print_every=40):
     steps = 0
@@ -29,9 +29,9 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs, print_ev
     path_edit = path_full[:path_full.find("/outputs")]
     print(path_edit)
     wandb.init(project="MLOpsG13")
-    sweep_id = wandb.sweep(sweep=sweep_configuration, project="MLOpsG13")
+    # sweep_id = wandb.sweep(sweep=sweep_configuration, project="MLOpsG13")
 
-    wandb.agent(sweep_id, function=train, count=4)
+    # wandb.agent(sweep_id, function=train, count=4)
 
     for e in range(epochs):
         # Model in training mode, dropout is on
