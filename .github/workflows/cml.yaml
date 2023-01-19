@@ -62,7 +62,7 @@ jobs:
 
       - name: Perform unit tests
         run: |
-           pytest tests/tagifai
+           pytest tests/
       - name: Auto linting
         run: |
            black --check --verbose .
