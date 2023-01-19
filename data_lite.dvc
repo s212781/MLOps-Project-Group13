@@ -1,0 +1,5 @@
+outs:
+- md5: 87329eeda0e28ac8d9547860985ff6a5.dir
+  size: 18593358
+  nfiles: 926
+  path: data_lite
