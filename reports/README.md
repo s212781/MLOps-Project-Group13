@@ -180,9 +180,7 @@ During our project development, we used git and Github to collaborate easily wit
 >
 > Answer:
 
---- question 10 fill here ---
-
-Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. This helped us about data sharing and ensuring reproducibility in our project. The data sharing became easier with DVC.
+Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. This helped us about data sharing and ensuring reproducibility in our project since we were able to push and pull the data from a google cloud bucket. This way we can store large amounts of compressed data in the cloud instead of on our computers or github repo. 
 
 ### Question 11
 
@@ -197,8 +195,6 @@ Data Version Control helps us take versionig of data, models and experiments in 
 > *... . In particular for our ..., we used ... .An example of a triggered workflow can be seen here: <weblink>*
 >
 > Answer:
-
---- question 11 fill here ---
 
 We used unit testing to test the dataset and the model. For the testing part of the setup, we test dataset length, image type, and whether the label represantations are correct or not. For the model, we test the tensor input and output dimensions. We also use linting by black and
 
@@ -221,9 +217,7 @@ TO BE COMPLETED*
 >
 > Answer:
 
---- question 12 fill here ---
-
-To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra and config files for our experiments. With Hydra, we can write config files and keep track of our hyperparameters in experiments. This way we can obtain a more clear picture of the model configuration and it becomes easier to do the version control of the configuration.
+To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra with configuration files for our experiments. With Hydra, we can write config files and keep track of our hyperparameters in experiments. To do so, we created a config folder which contains a folder named experiments with two different experiment scripts with a different combination of hyperparameters and then a script named default_config.py which chooses which of the two defined experiments to launch. Therefore in the code, then you use the hydra main function line to access the .yaml and read the values of interest.
 
 ### Question 13
 
