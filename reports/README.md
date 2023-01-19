@@ -75,7 +75,7 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 3 fill here ---
 
-We used the third party framework Pytorch Image Models (TIMM) in our project as we decided to work on a computer vision project. From this framework we used the resnet152 model with its updated pretrained weights. To this model, we then added a fully connected layer at the end with dimension 120 since we are using the Stanford dogs image dataset to classify 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transformations on the images. Then finally to build our deep learning model, we used optim and nn modules from torch in our project.
+For our project, we used the third party framework Pytorch Image Models (TIMM) since we decided to work on a computer vision project. From this framework we used the resnet152 model with its updated pretrained weights. We then added a fully connected layer at the end with dimension 120 since we are using the Stanford dogs image dataset which contains over 20000 dog samples for a total of 120 different dog breeds which is our number of classes. The selected framework is part of fast.ai and the hugging face ecosystem and it was used in order to be able to use a standard pre trained model in a quick and efficient way in order to pay attention to what really matters which is the pipeline and not the model deployment.
 
 ## Coding environment
 
