@@ -6,13 +6,13 @@ jobs:
 test-code:
 runs-on: ubuntu-latest
 steps:
-- name: Checkout repo
+name: Checkout repo
 uses: actions/checkout@v2
-- name: Install dependencies
+name: Install dependencies
 run: make install-test
-- name: dvc
+name: dvc
 run: dvc pull
-- name: Execute tests
+name: Execute tests
 run: pytest tests/tagifai
-- name: Auto linting
+name: Auto linting
 run: black --check --verbose .
