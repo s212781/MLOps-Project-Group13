@@ -92,4 +92,3 @@ target/
 
 /model_v1_0.pth
 *.pth
-/data_lite
