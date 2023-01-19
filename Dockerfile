@@ -18,6 +18,7 @@ COPY data.dvc data.dvc
 COPY .dvc/ .dvc/
 COPY main.py main.py
 COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
+COPY data_lite data_lite
 RUN python3 -m pip install -U pip
 RUN pip3 install -r requirements.txt --no-cache-dir
 
