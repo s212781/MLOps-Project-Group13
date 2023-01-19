@@ -50,7 +50,7 @@ def train_params():
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
-    dataset = ImageFolder('data_lite/images')
+    dataset = ImageFolder('data/images')
     
     random_seed = 45
     torch.manual_seed(random_seed);
