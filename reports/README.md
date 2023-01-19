@@ -120,9 +120,7 @@ We have used the cookiecutter template in our project to organize our code start
 >
 > Answer:
 
---- question 6 fill here ---
-
-We have used flake8 to adjust our code and check that our code is pep8 compliant. It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily. 
+We have used flake8 to adjust our code and check that our code is pep8 compliant. It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily. Pep8 ... and flake was used to ...
 
 ## Version control
 
@@ -134,8 +132,6 @@ We have used flake8 to adjust our code and check that our code is pep8 compliant
 > **How many tests did you implement?**
 >
 > Answer:
-
---- question 7 fill here ---
 
 We have implemented a data test and a model test. Details are in the CI setup question.
 
@@ -151,8 +147,6 @@ We have implemented a data test and a model test. Details are in the CI setup qu
 > *code and even if we were then...*
 >
 > Answer:
-
---- question 8 fill here ---
 
 We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
 TO BE UPDATED* coverage percent
@@ -171,9 +165,7 @@ TO BE UPDATED* coverage percent
 >
 > Answer:
 
---- question 9 fill here ---
-
-During our project development, we used git and Github to collaborate easier and do a proper version control of our code. It helped us keep track of the changes made in the code. We could follow what changes were made, who made them and when they were made. We made use of branches in our project. All of the group members mostly worked on different branches to avoid conflicts when developing simultaneously. Other than the main branch, we had branches dev, model, test, report for different purposes. We also used pull requests, which helped us implement different parts of the code without affecting the main branch.
+During our project development, we used git and Github to collaborate easily with each other and do a proper version control of our code. It helped us keep track of the changes made in the code. We could follow what changes were made, who made them and when they were made. We mostly made use of branches in our project. All of the group members mostly worked on different branches to avoid conflicts when developing simultaneously. Initially each member was to have his own branch but in the end, branches were created for the specific task under development. Examples of these are: dev, model, test, report, hydra_logging for different purposes. We didn't use pull requests since our repo didn't have any safety features however we did not merge any branch with the main until everyone was sure that the branch to merge was working and all members approved of this merge.
 
 ### Question 10
 
