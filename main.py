@@ -102,9 +102,11 @@ if __name__ == "__main__":
 
     model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
     
+    save_checkpoint(model)
+    
     validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
-    save_checkpoint(model)
+    
   
 
 
