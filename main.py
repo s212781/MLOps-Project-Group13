@@ -68,7 +68,7 @@ def load_data():
   
     # train_dataset = MyDataset(train_ds, train_transform())
     # val_dataset = MyDataset(val_ds, val_transform())
-    dataset = 'data_mnist/'
+    dataset = 'data_mnist'
     train_path = dataset + "/train_"
     test_path = dataset + "/test.npz"
     train_dataset = MyDataset(train_path, train=True)
