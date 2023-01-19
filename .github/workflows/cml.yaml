@@ -34,15 +34,7 @@ name: model-training
 on: [push]
 jobs:
   run:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        python-version: ["3.9", "3.10"]
-        pytorch-version: ["1.11.0", "1.12.0"]
-
-
+    runs-on: ubuntu-latest
     container: ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
       contents: 'read'
@@ -52,7 +44,7 @@ jobs:
       - name: Get pip cache dir
         id: pip-cache
         run: |
-        echo "::set-output name=dir::$(~/pip cache dir)"
+          echo "::set-output name=dir::$(pip cache dir)"
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
