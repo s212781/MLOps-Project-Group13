@@ -22,6 +22,7 @@ COPY .dvc/config .dvc/config
 COPY data_lite.dvc data_lite.dvc
 COPY entrypoint.sh entrypoint.sh
 COPY models/ models/
+COPY main.py main.py
 
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install wandb
