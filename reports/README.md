@@ -302,6 +302,10 @@ Through Weights & Biases (W&B) we have been able to track some variables. This i
 
 ![sweep.png](figures/sweep.PNG)
 
+The next image shows wandb's system monitoring. This is hsown since we haven't been able to run our code with GPU because of various problems explained later therefore it was run on CPU but since it takes so long we haven't finished the training hence not being able to show more plots. But this proves that wand is set up and that sweep configuration has been implemented.
+
+![wandb_sweep.png](figures/wandb_sweep.PNG)
+
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
@@ -408,7 +412,7 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 >
 > Answer:
 
-We did not manage to deploy our model. The reasons for that are...
+We did not manage to deploy our model either locally nor on the cloud. We did not manage to do so because we were stuck dealing with other issues such as running our code on GPU on a Virtual Machine which ended up being much more complicated than expected due to the fact that many things had to favourably align in order for the training to happen. Since this took much of our time we though about how we could have done it if more time. We would have created a script that would have gotten the latest image created form the latest push on the main branch of our repo together with our deploy model script which we had ready in case we got to this point.
 
 ### Question 23
 
@@ -500,14 +504,16 @@ Overall we feel like the knowledge of the different subjects individually have b
 >
 > Answer:
 
---- question 27 fill here ---
+-s171198 wrote python scripts for training, applying the pretrained models, adding the data to the Google Cloud and integrating dvc. Initialised instances, developed the trained model.pth file for evaluation of the trained model. Setting up docker triggers for the cloud build and integrating the github workflow.
 
--s171198 was in charge of writing the python scripts for training, applying the pretrained models, adding the data to the Google Cloud and integrating dvc into the pipeline. As well as initialising the instances, and developinng the trained model.pth file for evaluation of the trained model. Setting up docker triggers for the cloud build and integrating the github workflow.
+-s212781 setup the github repository and help coding with loading and setting up data. Complying with good coding practices by using black, pep8 and flake as well as code typing and documenting. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep.
 
--s212711
+-s212488 complying with good coding practices by using black, pep8 and flake as well as code typing and documenting. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep. Helped with coding.
 
--s212383 worked with unit testing, caching and continous integration and setting up version control. He was responsible for the report and helped on coding.
+-s212711 worked on unit testing and continuous integrations as well as trying to implement the 'deploy_model.py' which should predict the class of a new unseen image.
 
--s212488
+-s212383 worked with unit testing, caching and continuous integration and setting up version control. He was responsible for the report and helped on coding.
 
--s212781
+
+
+
