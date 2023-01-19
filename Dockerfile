@@ -17,7 +17,7 @@ COPY data.dvc code/data.dvc
 COPY .dvc/ code/.dvc/
 COPY main.py code/main.py
 COPY model_v1_0.pth.dvc code/model_v1_0.pth.dvc
-RUN python -m pip install -U pip.
+RUN python3 -m pip install -U pip.
 RUN pip3 install -r code/requirements.txt --no-cache-dir
 
 ENTRYPOINT ["python", "-u", "code/main.py"]
