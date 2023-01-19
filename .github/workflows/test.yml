@@ -7,15 +7,14 @@ jobs:
   test-code:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-dvc@v1
       - name: Install dependencies
         run: make requirements
-      - uses: iterative/setup-dvc@v1
       - name: Get data
-          run: dvc pull
-          env:
-            GDRIVE_CREDENTIALS_DATA: $
+        run: dvc pull
+        env:
+          GDRIVE_CREDENTIALS_DATA: $
       - name: Execute tests
         run: pytest tests/tagifai
       - name: Auto linting
