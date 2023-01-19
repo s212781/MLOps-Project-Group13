@@ -89,4 +89,5 @@ target/
 .mypy_cache/
 /data
 /old scripts
-
+/data_lite
+/model_v1_0.pth

@@ -34,7 +34,7 @@ def all(config):
                                 shuffle=True, pin_memory=True, num_workers=hparams["num_workers"])
         validloader = DataLoader(valid_dataset, hparams["batch_size"],
                                 shuffle=False, pin_memory=True, num_workers=hparams["num_workers"])
-        print(model, trainloader, validloader, criterion, optimizer, hparams["epochs"])
+        # print(model, trainloader, validloader, criterion, optimizer, hparams["epochs"])
         model= train_model.train(model, trainloader, validloader, criterion, optimizer, hparams["epochs"])
 
         save_checkpoint(model)
