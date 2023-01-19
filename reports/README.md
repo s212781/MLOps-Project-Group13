@@ -75,7 +75,7 @@ s212781, s212383, s212711, s171198, s212488
 
 --- question 3 fill here ---
 
-We used the third party framework Pytorch image models in our project as we decided to work on a computer vision project. We were using the Stanford dogs image dataset to classify different dog breeds which contains 20,850 samples of 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transforms. Then finally to build our deep learning model, we used optim and nn from torch in our project.
+We used the third party framework Pytorch image models in our project as we decided to work on a computer vision project. We were using the Stanford dogs image dataset to classify different dog breeds which contains 20,850 samples of 120 different dog breeds. First we needed to perform image data pre-processing on the dataset. For this purpose we used PIL (Python Image Library) and Opencv (cv2) to crop and process the images. Then we used transforms from torchvision to perform necessary transforms on the images. Then finally to build our deep learning model, we used optim and nn modules from torch in our project.
 
 ## Coding environment
 
@@ -96,8 +96,9 @@ We used the third party framework Pytorch image models in our project as we deci
 
 --- question 4 fill here ---
 
-We have created requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements can be find in requirements.txt file, To get a complete copy of our development enviroment, one would have to run the following commands:
-TO BE COMPLETED*
+To provide an easier setup for the development and contribution process, we have created requirements.txt file for managing our dependencies in the project. The list of dependencies was auto-generated using pipreqs. The detailed list of the requirements to run our code can be find in requirements.txt file located in the main project folder. To get a complete copy of our development enviroment, one would have to run the following commands: 
+git clone https://github.com/s212781/MLOps-Project-Group13.git, pip install -r requirements.txt
+This way the user will be ready to copy the evironment to the local computer and be able to contribute to the project development.
 
 ### Question 5
 
@@ -128,7 +129,7 @@ We haven't added new folders.
 
 --- question 6 fill here ---
 
-We have used flake8 to adjust our code and check that our code is pep8 compliant. We also used docstrings for documentation. We learned and discussed in the course that, a piece of code is written once, but read many times. It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily, when working in a group project. 
+We have used flake8 to adjust our code and check that our code is pep8 compliant. It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily. 
 
 ## Version control
 
@@ -146,7 +147,6 @@ We have used flake8 to adjust our code and check that our code is pep8 compliant
 We have implemented a data test and a model test.
 TO BE UPDATED* with recent tests
 
-
 ### Question 8
 
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close**
@@ -163,7 +163,7 @@ TO BE UPDATED* with recent tests
 --- question 8 fill here ---
 
 We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
-TO BE UPDATED* regarding recent tests and coverage percent
+TO BE UPDATED* coverage percent
 
 
 ### Question 9
@@ -217,6 +217,8 @@ TO BE COMPLETED* regarding DVC usage
 > Answer:
 
 --- question 11 fill here ---
+
+We used unit testing to test the dataset and the model. We test dataset length, image type, and whether the label represantations are correct or not. For the model, we test the tensor input and output dimensions. We also use linting by black and
 
 TO BE COMPLETED*
 
@@ -310,7 +312,6 @@ TO BE COMPLETED*
 --- question 16 fill here ---
 
 Debugging is important to find what is wrong in our code and determine how it can be fixed. For debugging, we mostly used the python debugger for visual studio code debugger. We benefited from using breakpoints to debug our code by running it in debug mode. We can perform many different operations such as step into, step over and step out to run the code step by step and this way it becomes easier to figure out the problems in our code. Profiling can help us optimize our code. We can do this by searching for bottlenecks and speeding up our code using profilers. 
-TO BE COMPLETED* in case we used profiling.
 
 
 ## Working in the cloud
@@ -346,6 +347,8 @@ We used the following two services: Virtual Machine and Bucket. A virtual machin
 > Answer:
 
 --- question 18 fill here ---
+
+We used the compute engine from google cloud platform to run our project pipeline. We used instances with the following hardware: 50 GB boot disk, and we started the using a custom container: 
 
 TO BE COMPLETED*
 
