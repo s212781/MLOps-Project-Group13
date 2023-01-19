@@ -1,11 +1,8 @@
 # # Base image
-FROM ubuntu:20.04
+FROM python:3.8-slum
 
 # install python
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.8 \
-    python3-pip \
-
     python3-setuptools \
     && \
     apt-get clean && \
@@ -39,8 +36,6 @@ RUN pip3 install dvc[gs]
 RUN ls
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
-
-
 
 # # # Base image
 # FROM ubuntu:18.04

@@ -5,9 +5,15 @@ from src.features.build_features import MyAwesomeModel as Mymodel
 from src.models import train_model, predict_model
 from torchvision.datasets import ImageFolder
 from torch.utils.data import random_split, DataLoader
-from src.data.make_dataset import MyDataset
 from src.data.transforms import train_transform, val_transform
 import subprocess
+
+#####
+# from src.data.make_dataset import MyDataset
+from src.data.make_dataset_mnist import MyDataset
+####
+
+
 
 def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     print("Training...")
@@ -33,11 +39,11 @@ def validate(model, model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model = models.resnet152(pretrained=True)
-    num_ftrs = model.fc.in_features
-    
-    model.fc = nn.Linear(num_ftrs, 120)
-   
+    # model = models.resnet152(pretrained=True)
+    # num_ftrs = model.fc.in_features
+    # model.fc = nn.Linear(num_ftrs, 10)
+    # this is the given configuration for the 'tiny' model
+    model = Mymodel()
     return model
 
 def train_params():
@@ -50,19 +56,23 @@ def train_params():
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
-    dataset = ImageFolder('data_lite/images')
-    
-    random_seed = 45
-    torch.manual_seed(random_seed);
+    # dataset = ImageFolder('data_mnist/')
+    # random_seed = 45
+    # torch.manual_seed(random_seed);
 
-    val_pct = 0.3
-    val_size = int(len(dataset)*val_pct)
-    train_size = len(dataset) - val_size
+    # val_pct = 0.3
+    # val_size = int(len(dataset)*val_pct)
+    # train_size = len(dataset) - val_size
 
-    train_ds, val_ds = random_split(dataset, [train_size, val_size])
+    # train_ds, val_ds = random_split(dataset, [train_size, val_size])
   
-    train_dataset = MyDataset(train_ds, train_transform())
-    val_dataset = MyDataset(val_ds, val_transform())
+    # train_dataset = MyDataset(train_ds, train_transform())
+    # val_dataset = MyDataset(val_ds, val_transform())
+    dataset = 'data_mnist/'
+    train_path = dataset + "/train_"
+    test_path = dataset + "/test.npz"
+    train_dataset = MyDataset(train_path, train=True)
+    val_dataset = MyDataset(test_path, train=False)
 
     return train_dataset, val_dataset
 
@@ -75,7 +85,7 @@ def load_checkpoint(model, filepath):
 def save_checkpoint(model):
     # Giving values but they are not used.
     checkpoint = {'input_size': 1,
-              'output_size': 120,
+              'output_size': 10,
               'state_dict': model.state_dict()}
 
     torch.save(checkpoint, 'model_v1_0.pth')
