@@ -69,8 +69,6 @@ jobs:
           dvc pull data_lite --run-cache
           # dvc repro
 
-      - name: Run python script
-        run: |
-          python main.py
+      
 
      
