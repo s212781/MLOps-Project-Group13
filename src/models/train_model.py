@@ -1,20 +1,37 @@
+import os
 import torch
 from torch import optim, nn
 from src.models.predict_model import validation
 import wandb
 
 
+
+sweep_configuration = {
+    'method': 'random',
+    'name': 'sweep',
+    'metric': {
+        'goal': 'minimize', 
+        'name': 'test_loss'
+		},
+    'parameters': {
+        'batch_size': {'values': [64, 128, 256]},
+        'epochs': {'values': [2, 5, 10]},
+        'lr': {'max': 0.1, 'min': 0.0001}
+     }
+}
+
 def train(model, trainloader, testloader, criterion, optimizer, epochs, print_every=40):
     steps = 0
     running_loss = 0
     loss_total = []
 
+    path_full =os.getcwd()
+    path_edit = path_full[:path_full.find("/outputs")]
+    print(path_edit)
     wandb.init(project="MLOpsG13")
-    sweep_id = wandb.sweep(sweep="sweep.yaml", project="project-MLOpsG13")
+    sweep_id = wandb.sweep(sweep=sweep_configuration, project="MLOpsG13")
 
     wandb.agent(sweep_id, function=train, count=4)
-
-    wandb.watch(model, log_freq=100)
 
     for e in range(epochs):
         # Model in training mode, dropout is on
