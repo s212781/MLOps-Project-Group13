@@ -263,7 +263,7 @@ Through Weights & Biases (W&B) we have tracked some variables such as the train 
 >
 > Answer:
 
-We used docker in order to create docker images. Most of the docker images created were for local training although these can be differentiated between those which use the full dataset and those trained with a lite version of the dataset with 3 to 7 classes. Since we used the Cloud Build service, every time something is pushed to the main branch in our repo, the latest docker image is created being up to date. Also, the docker image always contains the latest version of the data due to the implementation of dvc pull. 
+We used docker in order to create docker images. Most of the docker images created were for local training although these can be differentiated between those which use the full dataset and those trained with a lite version of the dataset with 3 to 7 classes. Since we used the Cloud Build service, every time something is pushed to the main branch in our repo, the latest docker image is created being up to date. Also, the docker image always contains the latest version of the data due to the implementation of dvc pull. We would run the docker image as: docker run trainer:latest. The link to one of our docker images is: gcr.io/dtumlops-374307/project_docker@sha256:58f012a11cf43c5c0b034966d7b2a9ecef8bc9be102e91c73628ffdbddd7270c.
 
 ### Question 16
 
