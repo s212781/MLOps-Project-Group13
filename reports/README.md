@@ -109,10 +109,7 @@ This way the user will be ready to copy the evironment to the local computer and
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
-
-We have used the cookicutter template in our project to organize our code starting from the very beginning. Cooki cutter is a standardized way of creating project structures. From the cookiecutter template we have filled out the folders and files that we found necessary. These folders are the readme , models, reports, requirements, src(_init_, make_dataset, build_features, predict_model, train_model) and toxi_ini folder. However, some default folders were unnecessary for our implementation . Thus we have removed the notebooks folder, as we did not use any jupyter notebooks in our project. We also removed references folder since it was unrelated with our tasks. 
-We haven't added new folders.
+We have used the cookiecutter template in our project to organize our code starting from the very beginning. Cookiecutter is a standardized way of creating project structures. From the cookiecutter template we have filled out the folders and files that we found necessary. In the src folder we used the data subfolder for creating the make_dataset.py script which loops over the image directory and extracts the images with their labels. In the model subfolder of src we have defined the train and evaluation files. In data/external the raw images were stored and then the cropt compressed data is stored in data/processed. The models are then stored in the Models folder. The readme file was also completed. Many of the other foders were unnecessary for our implementation such as features and visualization thus we have removed or will remove them such as the notebooks folder and references folders. No new folders were added.
 
 ### Question 6
 
