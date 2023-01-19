@@ -248,7 +248,7 @@ For the reproducibility of our experiments, we made use of config files and Hydr
 
 Through Weights & Biases (W&B) we have tracked some variables such as the train and validation loss and the accuracy. These were tracked through a very simple wandb.log and help the user follow the model's behaviour. At the same time, we also did hyperparameter sweeping where we define in a dictionary the metric of interest: validation loss and that we want to minimizing. Then we define the parameters we are going to sweep through, in other words we are going to try different values for batch size, epochs and learning rate in order to minimize the validation loss. All this is done through the wandb sweep utility function.
 
-![bucket_13.png](figures/sweep.png)
+![sweep.png](figures/sweep.png)
 
 ### Question 15
 
