@@ -144,8 +144,7 @@ We have used flake8 to adjust our code and check that our code is pep8 compliant
 
 --- question 7 fill here ---
 
-We have implemented a data test and a model test.
-TO BE UPDATED* with recent tests
+We have implemented a data test and a model test. Details are in the CI setup question.
 
 ### Question 8
 
@@ -198,9 +197,7 @@ During our project development, we used git and Github to collaborate easier and
 
 --- question 10 fill here ---
 
-Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. 
-We did make use of DVC in the following way: ... . In the end it helped us in ... for controlling ... part of our pipeline
-TO BE COMPLETED* regarding DVC usage
+Data Version Control helps us take versionig of data, models and experiments in our project. One can track and save data and machine learning models, create and switch between the versions and compare model metrics among experiments. For the data, the most important aspect of data version control is that it allows us to control the version of data with huge sizes that we use for our experiments. We used DVC from iterative ai in our project to keep track of our data. This helped us about data sharing and ensuring reproducibility in our project. The data sharing became easier with DVC.
 
 ### Question 11
 
@@ -218,7 +215,7 @@ TO BE COMPLETED* regarding DVC usage
 
 --- question 11 fill here ---
 
-We used unit testing to test the dataset and the model. We test dataset length, image type, and whether the label represantations are correct or not. For the model, we test the tensor input and output dimensions. We also use linting by black and
+We used unit testing to test the dataset and the model. For the testing part of the setup, we test dataset length, image type, and whether the label represantations are correct or not. For the model, we test the tensor input and output dimensions. We also use linting by black and
 
 TO BE COMPLETED*
 
@@ -348,7 +345,7 @@ We used the following two services: Virtual Machine and Bucket. A virtual machin
 
 --- question 18 fill here ---
 
-We used the compute engine from google cloud platform to run our project pipeline. We used instances with the following hardware: 50 GB boot disk, and we started the using a custom container: 
+We used the compute engine to run our ... . We used instances with the following hardware: ... and we started the using a custom container: ...
 
 TO BE COMPLETED*
 
