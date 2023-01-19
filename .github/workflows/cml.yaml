@@ -50,6 +50,11 @@ jobs:
           workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
 
+
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
   
       - uses: actions/cache@v3
         with:
