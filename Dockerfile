@@ -1,64 +1,62 @@
-# # Base image
-FROM ubuntu:18.04
+# Base image
+FROM python:3.10-slim
 
 # install python
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.8 \
-    python3-pip \
-    python3-setuptools \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt update && \
+    apt install --no-install-recommends -y build-essential gcc && \
+    apt clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /
+# git is needed to run DVC as we use git for version control
+RUN apt-get update && apt-get install -y git
+
+#RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+WORKDIR /root
+
+# Make sure gsutil will use the default service account
+# RUN echo '[GoogleCompute]\nservice_account = default' > /etc/boto.cfg
 
 COPY requirements.txt requirements.txt
 COPY src/ src/
-COPY data.dvc data.dvc
-COPY .dvc/ .dvc/
-COPY main.py main.py
-COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
-COPY data_lite data_lite
-RUN python3 -m pip install -U pip
-RUN pip3 install -r requirements.txt --no-cache-dir
+COPY .dvc/config .dvc/config
+COPY data_lite.dvc data_lite.dvc
+COPY entrypoint.sh entrypoint.sh
+COPY models/ models/
 
-ENTRYPOINT ["python3", "-u", "main.py"]
+RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install wandb
+RUN pip install dvc
+RUN pip install dvc[gs]
+RUN pip install -e .
+RUN ls
+
+ENTRYPOINT ["sh", "entrypoint.sh"]
 
 
-# RUN apt-get -y update; apt-get -y install curl
 
-# # Downloading gcloud package
-# RUN curl https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz > /tmp/google-cloud-sdk.tar.gz
+# # # Base image
+# FROM ubuntu:18.04
 
-# # Installing the package
-# RUN mkdir -p /usr/local/gcloud \
-#   && tar -C /usr/local/gcloud -xvf /tmp/google-cloud-sdk.tar.gz \
-#   && /usr/local/gcloud/google-cloud-sdk/install.sh 
-
-# #Adding the package path to local
-# ENV PATH $PATH:/usr/local/gcloud/google-cloud-sdk/bin
-
-# RUN gcloud auth configure-docker
-
-# RUN pip3 install -r code/requirements.txt --no-cache-dir
-
-# ENTRYPOINT ["python", "-u", "code/inti.sh"]
-
-# FROM python:3.8-slim
-
-# # install python 
-# RUN apt update && \
-#     apt install --no-install-recommends -y build-essential gcc && \
-#     apt clean && rm -rf /var/lib/apt/lists/*
-
-# COPY requirements.txt requirements.txt
-# COPY main.py main.py
-# COPY src/ src/
-# COPY data.dvc data.dvc
-# COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
-# COPY .dvc .dvc
+# # install python
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     python3.8 \
+#     python3-pip \
+#     python3-setuptools \
+#     && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
 
 # WORKDIR /
-# RUN pip install -r requirements.txt --no-cache-dir
 
+# COPY requirements.txt requirements.txt
+# COPY src/ src/
+# COPY data.dvc data.dvc
+# COPY .dvc/ .dvc/
+# COPY main.py main.py
+# COPY model_v1_0.pth.dvc model_v1_0.pth.dvc
+# COPY data_lite data_lite
+# RUN python3 -m pip install -U pip
+# RUN pip3 install -r requirements.txt --no-cache-dir
+
+# ENTRYPOINT ["python3", "-u", "main.py"]
 
