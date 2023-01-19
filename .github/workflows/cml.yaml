@@ -53,7 +53,7 @@ jobs:
   
       - uses: actions/cache@v3
         with:
-          path: MLOps-Project-Group13/.github/workflows/cache
+          path: ${{ steps.cache-path.outputs.dir }}
           key: ${{ hashFiles('**/requirements.txt') }}
 
       - name: Install requirements
