@@ -41,20 +41,20 @@ jobs:
       id-token: 'write'
     steps:
 
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-          ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
-
       - uses: actions/checkout@v3
       - id: 'auth'
+
+      - name: Get pip cache dir
+        id: pip-cache-dir
+        run: |
+            echo "::set-output name=dir::$(pip cache dir)"
+      - name: Restore pip cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          key: pip-${{ runner.os }}-${{ hashFiles('**/requirements.txt') }}
+
+      
         name: 'Authenticate to Google Cloud'
         uses: 'google-github-actions/auth@v1'
         with:
