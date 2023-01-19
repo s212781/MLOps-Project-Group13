@@ -412,6 +412,14 @@ Monitoring is important after deploying a machine learning model to ensure its d
 
 --- question 25 fill here ---
 
+![pipeline.jpeg](figures/pipeline.jpeg)
+
+The starting point of the diagram is our local setup, where the computer symbol is referring to each one of the team developers. The first step is to create a GitHub repository and clone in into each one of the local machines. After that, use cookie cutter to create a data science template in order to achieve a better organization of the project. Furthermore, the use of an Anaconda environment allows each one of the local machines to work with the same setup configuration. On one hand, Pytorch was used to reduce unnecessary code and make the coding overview simpler for the developers. On the other hand, caring about the styling of the code is a good practice that’s why we installed flake8 and black, to check and correct the code following the standardization from Pep8. Also, we implemented the hyperparameters using Hydra, and created different experiments config-files where a specific configuration of the parameters was settled for each experiment. Then we used "Weights&Biases" to log and visualize the training experiments applying the wandb configuration into our code. Finally, each developer was able to commit and push its work to GitHub repository so that another member team could pull it into his computer if needed. In addition, pytest test functions were created where the code functions are checked for its correctness. As soon as there are new push or pull requests on the main branch, Github actions runs this pytests.
+
+At the same time, dvc is used in order to obtain the data that is on the Google Cloud storage, so in that way the data is not inside the GitHub repository. Also, each version of the data can be pushed and pulled with DVC. 
+
+On the other hand, we created a trigger in the form of a .yaml file which triggered a build and push of a docker image corresponding to the newest push to the main repository on GitHub. After the docker image is build, it is launched using the compute engine provided by Google Cloud, the image trains a model to classify the breed of certain dogs and this model is the output from our docker container.Finally, any external user could access the code just pulling the docker image from docker.
+
 ### Question 26
 
 > **Discuss the overall struggles of the project. Where did you spend most time and what did you do to overcome these**
