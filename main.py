@@ -1,33 +1,32 @@
+import os
 import torch
 import hydra
 from torch import optim, nn
 import torchvision.models as models
-from src.features.build_features import MyAwesomeModel as Mymodel
-from src.models import train_model, predict_model
 from torchvision.datasets import ImageFolder
-from torch.utils.data import random_split, DataLoader
 from src.data.make_dataset import MyDataset
+from src.models import train_model, predict_model
+from torch.utils.data import random_split, DataLoader
 from src.data.transforms import train_transform, val_transform
+from src.features.build_features import MyAwesomeModel as Mymodel
+
 
 @hydra.main(config_path="config", config_name='default_config.yaml')
 def all(config):
 
-    # create model 
+    # Calls the fucntion to create model and send it to GPUif exist
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("DEVICE", device)
     model = create_model()
     model.to(device)
 
-    # hyperparameters
+    # Hyperparameters using hydra
     hparams = config.experiment
     TRAIN = True
-    #bs = hparams["batch_size"]
-    #lr = hparams["learning_rate"]
-    #epochs = hparams["epochs"]
-    #num_workers = hparams["num_workers"]
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"])
 
+    # Train the model if TRAIN =True 
     if TRAIN:
         print("Training...")
         train_dataset, valid_dataset = load_data()
@@ -40,6 +39,7 @@ def all(config):
 
         save_checkpoint(model)
 
+    # Validate the model if TRAIN = False
     if not TRAIN:
         print("Evaluating...")
         _, valid_dataset = load_data()
@@ -57,31 +57,19 @@ def all(config):
         print("Test Loss: {:.3f}.. ".format(test_loss/len(validloader)),
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
-
-
-
-# def train(model, batch_size, epochs, num_workers, criterion, optimizer):
-    
-
-# def validate(model, model_path, batch_size, num_workers, criterion):
-    
-
 def create_model():
+    #Creates the model
     model = models.resnet152(models.ResNet152_Weights.DEFAULT)
     num_ftrs = model.fc.in_features
-
     model.fc = nn.Linear(num_ftrs, 120)
 
     return model
-    
-
-
-# def train_params(config):
-
-
 
 def load_data():
-    dataset = ImageFolder('data/processed/images')
+    #Loads the data from the path
+    path_full =os.getcwd()
+    path_edit = path_full[:path_full.find("/outputs")]
+    dataset = ImageFolder(path_edit + '/data/processed/images')
 
     random_seed = 45
     torch.manual_seed(random_seed)
@@ -97,7 +85,6 @@ def load_data():
 
     return train_dataset, val_dataset
 
-
 def load_checkpoint(model, filepath):
     checkpoint = torch.load(filepath, map_location=torch.device(
         'cuda' if torch.cuda.is_available() else 'cpu'))
@@ -105,7 +92,6 @@ def load_checkpoint(model, filepath):
     model.load_state_dict(checkpoint['state_dict'])
 
     return model
-
 
 def save_checkpoint(model):
     # Giving values but they are not used.
@@ -115,18 +101,5 @@ def save_checkpoint(model):
 
     torch.save(checkpoint, 'model_v1_0.pth')
 
-
 if __name__ == "__main__":
-
     all()
-    #device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    #print("DEVICE", device)
-    #model = create_model()
-    #model.to(device)
-
-    # batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
-
-    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
-    # validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)
-
-    # save_checkpoint(model)
