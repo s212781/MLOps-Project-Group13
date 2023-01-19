@@ -449,3 +449,13 @@ Overall we feel like the knowledge of the different subjects individually have b
 > Answer:
 
 --- question 27 fill here ---
+
+-s171198 was in charge of writing the python scripts for training, applying the pretrained models, adding the data to the Google Cloud and integrating dvc into the pipeline. As well as initialising the instances, and developinng the trained model.pth file for evaluation of the trained model. Setting up docker triggers for the cloud build and integrating the github workflow.
+
+-s212711
+
+-s212383
+
+-s212488
+
+-s212781
