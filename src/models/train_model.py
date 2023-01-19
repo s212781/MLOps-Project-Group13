@@ -70,7 +70,7 @@ def train(model, trainloader, testloader, criterion, optimizer, epochs, print_ev
                     test_loss, accuracy = validation(
                         model, testloader, criterion)
                     wandb.log({"test_loss": test_loss})
-                    wandb.log({"accuracy": accuracy})
+                    wandb.log({"test_accuracy": accuracy})
 
                 print("Epoch: {}/{}.. ".format(e+1, epochs),
                       "Training Loss: {:.3f}.. ".format(
