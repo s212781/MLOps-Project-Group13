@@ -321,8 +321,6 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 >
 > Answer:
 
---- question 19 fill here ---
-
 ![bucket_13.png](figures/bucket_13.png)
 
 ### Question 20
@@ -333,8 +331,6 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 > Answer:
 
 --- question 20 fill here ---
-
-![registry_13.png](figures/registry_13.png)
 
 ### Question 21
 
