@@ -34,7 +34,15 @@ name: model-training
 on: [push]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.10"]
+        pytorch-version: ["1.11.0", "1.12.0"]
+
+
     container: ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
       contents: 'read'
