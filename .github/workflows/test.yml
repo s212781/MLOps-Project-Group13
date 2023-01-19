@@ -1,7 +1,7 @@
 name: test
 on: [push]
 branches:
-- finalunittest
+  - finalunittest
 jobs:
   test-code:
     runs-on: ubuntu-latest
