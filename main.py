@@ -9,35 +9,62 @@ from torch.utils.data import random_split, DataLoader
 from src.data.make_dataset import MyDataset
 from src.data.transforms import train_transform, val_transform
 
+@hydra.main(config_path="config", config_name='default_config.yaml')
+def all(config):
 
-def train(model, batch_size, epochs, num_workers, criterion, optimizer):
-    print("Training...")
-    train_dataset, valid_dataset = load_data()
-    trainloader = DataLoader(train_dataset, batch_size,
-                             shuffle=True, pin_memory=True, num_workers=num_workers)
-    validloader = DataLoader(valid_dataset, batch_size,
-                             shuffle=False, pin_memory=True, num_workers=num_workers)
+    # create model 
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("DEVICE", device)
+    model = create_model()
+    model.to(device)
 
-    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+    # hyperparameters
+    hparams = config.experiment
+    TRAIN = True
+    #bs = hparams["batch_size"]
+    #lr = hparams["learning_rate"]
+    #epochs = hparams["epochs"]
+    #num_workers = hparams["num_workers"]
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.SGD(model.parameters(), lr=hparams["learning_rate"], momentum=hparams["momentum"])
+
+    if TRAIN:
+        print("Training...")
+        train_dataset, valid_dataset = load_data()
+        trainloader = DataLoader(train_dataset, hparams["batch_size"],
+                                shuffle=True, pin_memory=True, num_workers=hparams["num_workers"])
+        validloader = DataLoader(valid_dataset, hparams["batch_size"],
+                                shuffle=False, pin_memory=True, num_workers=hparams["num_workers"])
+
+        model= train_model.train(model, trainloader, validloader, criterion, optimizer, hparams["epochs"])
+
+        save_checkpoint(model)
+
+    if not TRAIN:
+        print("Evaluating...")
+        _, valid_dataset = load_data()
+        validloader = DataLoader(dataset=valid_dataset, batch_size=hparams["batch_size"],
+                                shuffle=False, pin_memory=True, num_workers=hparams["num_workers"])
+
+        model = load_checkpoint(model, 'model_v1_0.pth')
+        model.eval()
+
+        # Turn off gradients for validation, will speed up inference
+        with torch.no_grad():
+            test_loss, accuracy = predict_model.validation(
+                model, validloader, criterion)
+
+        print("Test Loss: {:.3f}.. ".format(test_loss/len(validloader)),
+            "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 
-def validate(model, model_path, batch_size, num_workers, criterion):
-    print("Evaluating...")
-    _, valid_dataset = load_data()
-    validloader = DataLoader(dataset=valid_dataset, batch_size=batch_size,
-                             shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    model = load_checkpoint(model, model_path)
-    model.eval()
 
-    # Turn off gradients for validation, will speed up inference
-    with torch.no_grad():
-        test_loss, accuracy = predict_model.validation(
-            model, validloader, criterion)
+# def train(model, batch_size, epochs, num_workers, criterion, optimizer):
+    
 
-    print("Test Loss: {:.3f}.. ".format(test_loss/len(validloader)),
-          "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
-
+# def validate(model, model_path, batch_size, num_workers, criterion):
+    
 
 def create_model():
     model = models.resnet152(models.ResNet152_Weights.DEFAULT)
@@ -46,17 +73,11 @@ def create_model():
     model.fc = nn.Linear(num_ftrs, 120)
 
     return model
+    
 
-@hydra.main(config_path="config", config_name='default_config.yaml')
-def train_params(config):
-    hparams = config.experiment
-    bs = hparams["batch_size"]
-    lr = hparams["learning_rate"]
-    epochs = hparams["epochs"]
-    num_workers = hparams["num_workers"]
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=lr, momentum=hparams["momentum"])
-    return bs, lr, epochs, num_workers, criterion, optimizer
+
+# def train_params(config):
+
 
 
 def load_data():
@@ -96,14 +117,16 @@ def save_checkpoint(model):
 
 
 if __name__ == "__main__":
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("DEVICE", device)
-    model = create_model()
-    model.to(device)
 
-    batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
+    all()
+    #device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    #print("DEVICE", device)
+    #model = create_model()
+    #model.to(device)
 
-    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    # batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
+
+    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
     # validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)
 
-    save_checkpoint(model)
+    # save_checkpoint(model)
