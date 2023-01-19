@@ -506,13 +506,13 @@ Overall we feel like the knowledge of the different subjects individually have b
 
 -s171198 wrote python scripts for training, applying the pretrained models, adding the data to the Google Cloud and integrating dvc. Initialised instances, developed the trained model.pth file for evaluation of the trained model. Setting up docker triggers for the cloud build and integrating the github workflow.
 
--s212781 setup the github repository and help coding with loading and setting up data. Complying with good coding practices by using black, pep8 and flake as well as code typing and documenting. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep.
+-s212781 setup repository and help coding with loading and setting up data. Complying with good coding practices by using black, pep8 and flake and code typing. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep. In charge of report.
 
--s212488 complying with good coding practices by using black, pep8 and flake as well as code typing and documenting. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep. Helped with coding.
+-s212488 complying with good coding practices by using black, pep8 and flake as well as code typing and documenting. Set up version control for the data and wrote configuration files for experiments with hydra. Also used W&B to log progress and hyperparameter optimization sweep. Helped with coding. Help on report.
 
--s212711 worked on unit testing and continuous integrations as well as trying to implement the 'deploy_model.py' which should predict the class of a new unseen image.
+-s212711 did unit testing and continuous integrations as well as trying to implement the 'deploy_model.py' which should predict the class of a new unseen image.
 
--s212383 worked with unit testing, caching and continuous integration and setting up version control. He was responsible for the report and helped on coding.
+-s212383 did unit testing, caching and continuous integration and setting up version control. He was responsible for the report and helped on coding.
 
 
 
