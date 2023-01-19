@@ -44,7 +44,7 @@ def train_params():
     bs = 64
     lr  = 0.001
     epochs = 3
-    num_workers = 1
+    num_workers = 0
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
     return bs, lr, epochs, num_workers, criterion, optimizer
