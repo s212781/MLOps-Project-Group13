@@ -34,7 +34,14 @@ name: model-training
 on: [push]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.10"]
+        pytorch-version: ["1.11.0", "1.12.0"]
+
     container: ghcr.io/iterative/cml:0-dvc2-base1
     permissions:
       contents: 'read'
@@ -51,10 +58,17 @@ jobs:
           service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
 
   
-      - uses: actions/cache@v3
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          path: ~/.cache/pip
-          key: ${{ hashFiles('**/requirements.txt') }}
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+          ${{ matrix.os }}-py${{ matrix.python-version }}-pt${{ matrix.pytorch-version }}-pip-
 
       - name: Install requirements
         run: |
