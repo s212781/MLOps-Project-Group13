@@ -11,4 +11,4 @@ dvc[gs]
 pandas
 numpy
 torchvision
-
+setuptools
