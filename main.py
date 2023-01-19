@@ -7,7 +7,7 @@ from torchvision.datasets import ImageFolder
 from torch.utils.data import random_split, DataLoader
 from src.data.transforms import train_transform, val_transform
 import subprocess
-
+from src.models.deploy_model import deploy
 #####
 # from src.data.make_dataset import MyDataset
 from src.data.make_dataset_mnist import MyDataset
@@ -39,11 +39,11 @@ def validate(model, model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    # model = models.resnet152(pretrained=True)
-    # num_ftrs = model.fc.in_features
-    # model.fc = nn.Linear(num_ftrs, 10)
+    model = models.resnet152(pretrained=True)
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Linear(num_ftrs, 120)
     # this is the given configuration for the 'tiny' model
-    model = Mymodel()
+    # model = Mymodel()
     return model
 
 def train_params():
@@ -93,19 +93,20 @@ def save_checkpoint(model):
 if __name__ == "__main__": 
     #lets use subprocess to import data
     # subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("DEVICE", device)
+    # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # print("DEVICE", device)
     model = create_model()
-    model.to(device)
+    # model.to(device)
 
-    batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
+    # batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
 
-    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
     # validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
     # save_checkpoint(model)
-
-    
+    model = load_checkpoint(model,'model_v1_0.pth')
+    model.eval()
+    deploy(model,r"C:\Users\thorl\Downloads\dog_lab.jpeg")
 
 
 
