@@ -21,7 +21,7 @@ COPY model_v1_0.pth.dvc code/model_v1_0.pth.dvc
 RUN python3 -m pip install -U pip
 RUN pip3 install -r code/requirements.txt --no-cache-dir
 
-ENTRYPOINT ["python", "-u", "code/main.py"]
+ENTRYPOINT ["python3", "-u", "code/main.py"]
 
 
 # RUN apt-get -y update; apt-get -y install curl
