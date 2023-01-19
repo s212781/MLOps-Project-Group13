@@ -263,9 +263,7 @@ Through Weights & Biases (W&B) we have tracked some variables such as the train 
 >
 > Answer:
 
---- question 15 fill here ---
-
-TO BE COMPLETED*
+We used docker in order to create docker images. Most of the docker images created were for local training although these can be differentiated between those which use the full dataset and those trained with a lite version of the dataset with 3 to 7 classes. Since we used the Cloud Build service, every time something is pushed to the main branch in our repo, the latest docker image is created being up to date. Also, the docker image always contains the latest version of the data due to the implementation of dvc pull. 
 
 ### Question 16
 
@@ -299,7 +297,6 @@ Debugging is important to find what is wrong in our code and determine how it ca
 > Answer:
 
 We used multiple services. The first one is Buckets for storing our data. Then we also used Cloud Engine in order to launch our virtual machines. Also, we used Cloud Registry to register all of our docker images created and then finally we used cloud Build which uses some triggers in the github in order to create the latest docker image when something new is pushed to the main branch in the repo.
-We used the following two services: Virtual Machine and Bucket. A virtual machine is an instance of a computer in the cloud. We can run applications and programs as if it were in our local computers. A bucket is used for data storage in google cloud platform services, which are associated with our project. We used it to store our dataset in the cloud.
 
 ### Question 18
 
@@ -314,7 +311,7 @@ We used the following two services: Virtual Machine and Bucket. A virtual machin
 >
 > Answer:
 
-The compute engine was used in order to create instances/our Virtual Machines. These had to have certain characteristics such as using the region "europe-west4" and zone "europe-west4-b" in order to be able to use the GPU NVIDIA T4 with the n1-standard-4 which allows to have a decent GPU with the enough amount of storage that we need. Once these characteristics were chosen, a container was deployed (using one of our docker images).
+The compute engine was used in order to create instances/our Virtual Machines. These had to have certain characteristics such as using the region "europe-west4" and zone "europe-west4-b" in order to be able to use the GPU NVIDIA T4 with the n1-standard-4 (4CPU, 16GB) which allows to have a decent GPU with the enough amount of storage that we need. Once these characteristics were chosen, a container was deployed (using one of our docker images).
 
 
 ### Question 19
