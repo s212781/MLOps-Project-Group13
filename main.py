@@ -50,7 +50,7 @@ def train_params():
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
-    dataset = ImageFolder('data/processed/images')
+    dataset = ImageFolder('data_lite/images')
     
     random_seed = 45
     torch.manual_seed(random_seed);
@@ -82,7 +82,7 @@ def save_checkpoint(model):
 
 if __name__ == "__main__": 
     #lets use subprocess to import data
-    subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
+    # subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print("DEVICE", device)
     model = create_model()
@@ -90,8 +90,8 @@ if __name__ == "__main__":
 
     batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
 
-    # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
-    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
+    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    # validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
     # save_checkpoint(model)
 
