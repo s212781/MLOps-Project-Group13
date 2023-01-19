@@ -120,7 +120,7 @@ We have used the cookiecutter template in our project to organize our code start
 >
 > Answer:
 
-It is important that our code is understandable for human readers. We have grouped a well organized code in two subtitles: documentation and styling. Documentation is important for code maintanence and further development. It saves us a lot of time, especially when re-visiting an old project, or a code written by someone else. Styling is also important for everyone to understand and contribute easily. We have used "flake8 . --max-line-length 100" to check if our code follows pep8 standard, and "black . --line-length 100" to make the corresponding modifications. Also, some changes needed to be done manually as black didn't corrected them all, as deleting the unsued imports, or removing the space before ":" or ",", as examples. This process managed to leave only 3 warnings from the flake8.
+Documentation is important for code maintanence and further development. It saves us a lot of time when looking at code written by someone else. Styling is also important for everyone to understand and contribute easily. We have used "flake8 . --max-line-length 100" to check if our code follows pep8 standard, and "black . --line-length 100" to make the corresponding modifications. Also, some changes needed to be done manually as black didn't corrected them all, as deleting the unsued imports, or removing the space before ":" or ",", as examples. This process managed to leave only 3 warnings from the flake8.
 
 ## Version control
 
@@ -214,7 +214,7 @@ Our CI setup is based on pytest unittests and github actions. This allowed us to
 >
 > Answer:
 
-To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra with configuration files for our experiments. With Hydra, we can write config files and keep track of our hyperparameters in experiments. To do so, we created a config folder which contains a folder named experiments with two different experiment scripts with a different combination of hyperparameters and then a script named default_config.py which chooses which of the two defined experiments to launch. Therefore in the code, then you use the hydra main function line to access the .yaml and read the values of interest.
+To configure our experiments, we needed to use a structure to keep track of and adjust our hyperparameters in an organised way. For this purpose, we used Hydra with configuration files for our experiments to keep track of our hyperparameters. We created a config folder which contains a folder named experiments with two different experiment scripts with a different combination of hyperparameters and then a script named default_config.py which chooses which of the two defined experiments to launch. Therefore in the code, then you use the hydra main function line to access the .yaml and read the values of interest.
 
 ### Question 13
 
@@ -357,6 +357,7 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 > Answer:
 
 --- question 22 fill here ---
+We did not manage to deploy our model. The reasons for that are...
 
 ### Question 23
 
