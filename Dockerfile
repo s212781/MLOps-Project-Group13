@@ -1,5 +1,5 @@
 # # Base image
-FROM python:3.8-slum
+FROM python:3.8-slim
 
 # install python
 RUN apt-get update && apt-get install -y --no-install-recommends \
