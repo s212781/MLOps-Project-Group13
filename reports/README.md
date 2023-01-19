@@ -133,7 +133,7 @@ It is important that our code is understandable for human readers. We have group
 >
 > Answer:
 
-We have implemented a data test and a model test. Details are in the CI setup question.
+We have implemented a data test and a model test.
 
 ### Question 8
 
@@ -148,8 +148,7 @@ We have implemented a data test and a model test. Details are in the CI setup qu
 >
 > Answer:
 
-We have used unit testing in our code to prevent possible errors during data loading and processing as well as model creation. Then we have calculated the coverage in our code with these unit tests. The total code coverage of our code is X%, which includes all our source code. We are far from 100% coverage of our code and even if we were then we would not be 100% sure about our code being error free. Unit testing helps us detect which functions in our code could possibly fail, which helps us detect the problems easier and act on them. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.  
-TO BE UPDATED* coverage percent
+Our total code coverage of code is 100%, but this includes only the model and the data code. Therefore, this has to be seen critically, since there are a lot of other code parts that are not tested. For demonstration purposes we focused on the main code parts for testing. There are a lot of other possible tests that could have been implemented. For instance a training with one epoch could have been checked to ensure the training is working. Also, more concrete test like testing the loss function or gradient computation could have been tested. However, unit testing are not enough for us to cover integration errors. It can not test non-functional attributes, such as scalability, reproducability etc.
 
 
 ### Question 9
@@ -196,9 +195,7 @@ Data Version Control helps us take versionig of data, models and experiments in 
 >
 > Answer:
 
-We used unit testing to test the dataset and the model. For the testing part of the setup, we test dataset length, image type, and whether the label represantations are correct or not. For the model, we test the tensor input and output dimensions. We also use linting by black and
-
-TO BE COMPLETED*
+Our CI setup is based on pytest unittests and github actions. This allowed us to collaborate and integrate our new code continously at the sam time. We created unittests to check possible errors in the code before it gets integrated. One test adresses the model and checks all input and output dimentions as well as the data propagation through the whole network. The other test makes sure that the data is in the right format, the dataset has the right length and all lables are represented. After implementing these tests we designed a workflow that is running on github actions, which is triggered by each push to the branch. This workflow creates a new environment within github actions, which is why we first install all requirement packages. The dvc authentification did not work, since no one of us got the in the lecture mentioned cache file (I wonder why?), therefore we had to use dummy data for the unittests. Also, we applied auto linting based on the black formatter. So, when we push new code to the github repository, the code is checked for errors first by the unittests and then it is formatted by black. Due to a lack of time, we did not implement branch protection rules. This could have added more safety and stability to out coding process.
 
 ## Running code and tracking experiments
 
