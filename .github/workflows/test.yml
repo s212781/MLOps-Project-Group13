@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: make install-test
+        run: make requirements
       - name: dvc
         run: dvc pull
       - name: Execute tests
