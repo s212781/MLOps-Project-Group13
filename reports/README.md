@@ -356,7 +356,6 @@ The compute engine was used in order to create instances/our Virtual Machines. T
 >
 > Answer:
 
---- question 22 fill here ---
 We did not manage to deploy our model. The reasons for that are...
 
 ### Question 23
@@ -371,8 +370,6 @@ We did not manage to deploy our model. The reasons for that are...
 > *measure ... and ... that would inform us about this ... behaviour of our application.*
 >
 > Answer:
-
---- question 23 fill here ---
 
 Monitoring is important after deploying a machine learning model to ensure its durability over time. We did not manage to implement monitoring for our project. We would like to have monitoring implemented such that over time we could keep track of the drift in the data and prevent our model from being useless over time. In our example, the dog breeds and the dogs' appearences will probably remain same, but the image qualities and the picture attributes may change over time and monitoring can help us track these changes and act upon them. We could also benefit from telemetry to check our system daily in a real-life example.
 
@@ -410,8 +407,6 @@ At the end, almost 60$ of credit was used with most of it going to the Compute E
 >
 > Answer:
 
---- question 25 fill here ---
-
 ![pipeline.jpeg](figures/pipeline.jpeg)
 
 The starting point of the diagram is our local setup, where the computer symbol is referring to each one of the team developers. The first step is to create a GitHub repository and clone in into each one of the local machines. After that, use cookie cutter to create a data science template in order to achieve a better organization of the project. Furthermore, the use of an Anaconda environment allows each one of the local machines to work with the same setup configuration. On one hand, Pytorch was used to reduce unnecessary code and make the coding overview simpler for the developers. On the other hand, caring about the styling of the code is a good practice that’s why we installed flake8 and black, to check and correct the code following the standardization from Pep8. Also, we implemented the hyperparameters using Hydra, and created different experiments config-files where a specific configuration of the parameters was settled for each experiment. Then we used "Weights&Biases" to log and visualize the training experiments applying the wandb configuration into our code. Finally, each developer was able to commit and push its work to GitHub repository so that another member team could pull it into his computer if needed. In addition, pytest test functions were created where the code functions are checked for its correctness. As soon as there are new push or pull requests on the main branch, Github actions runs this pytests.
@@ -432,7 +427,11 @@ On the other hand, we created a trigger in the form of a .yaml file which trigge
 >
 > Answer:
 
---- question 26 fill here ---
+Throughout the project, we had many problems to solve. some of these problems were at an individual level whilst others as a group development problem. Individually some of us had really big challenge with dvc and being able to pull the data from the cloud. A lot of time was spent on trying to fix it. Others had problems with docker and certain permissions. Collectively, hydra and w&b was challenging since in order to use hydra and the configuration files for the hyperparameters these have to be used in functions without any arguments and due to our code structure we found it difficult adapting it to it. Whereas w&b was challenging when creating the sweep configuration. Firstly, we tried doing it on a .yaml but did not find the way to import it so had to end up using the dictionary configuration which also gave problems when initialising the agent. Another problem was implememtning caching since there was a path error which seemed like a simple error to fix but ended up without being able to fix it. It is a pitty since caching would work if the path issue was solved.
+
+With regards to the google cloud service we found it challenging to share the project with the rest of the teammates so we could all work on the same one. Giving these permissions to the rest of the team members was difficult to find but in the end was successful. We also figured out that maybe instead of spending so much time on these permissions we could all just have uploaded the data to our own project and work from there. Finally, most of our struggles came with spending a lot of time on configuring the instances as well, since the regions are very specific where you are allowed to mount GPU's. We spoke with many other groups that picked data that didn't need to use GPU's and we think that is also where we struggled a lot. Our data was very detailed and therefore needed GPU's to run it. This tied our hands when it came to testing our scripts. We needed GPU's and very heavily reliant on the Google Cloud as a result.
+
+Overall we feel like the knowledge of the different subjects individually have been acquired but the tricky part was gluing them all together.
 
 ### Question 27
 
