@@ -302,13 +302,9 @@ Through Weights & Biases (W&B) we have been able to track some variables. This i
 
 ![sweep.png](figures/sweep.PNG)
 
-The next image shows wandb's system monitoring. This is hsown since we haven't been able to run our code with GPU because of various problems explained later therefore it was run on CPU but since it takes so long we haven't finished the training hence not being able to show more plots. But this proves that wand is set up and that sweep configuration has been implemented.
+The next image shows the metrics logged into wandb and a plot with all the logged metric whilst doing the sweep configuration. This proves that wandb was successfully implemented together with a sweep configuration to log all our results.
 
-![wandb_sweep.png](figures/wandb_sweep.PNG)
-
-As can be seen below, wandb works but fails because of a GPU problem.
-
-![wandb_problem.png](figures/wandb_problem.jpeg)
+![wandb.png](figures/wandb.jpeg)
 
 ### Question 15
 
