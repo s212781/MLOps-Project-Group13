@@ -38,13 +38,13 @@ def train(model, trainloader, testloader, criterion, optimizer=None, epochs=5, p
             if steps % print_every == 0:
                 # Model in inference mode, dropout is off
                 model.eval()
-                wandb.log({"Loss=": loss})
+                
                 # Turn off gradients for validation, will speed up inference
                 with torch.no_grad():
                     test_loss, accuracy = validation(model, testloader, criterion)
-                    wandb.log({"Test loss=": test_loss})
-                    wandb.log({"Acc=": accuracy})
-
+                    wandb.log({"Test loss=": test_loss/len(testloader)})
+                    wandb.log({"Acc=": accuracy/len(testloader)})
+                    wandb.log({"Loss=": test_loss/len(testloader)})
                 print("Epoch: {}/{}.. ".format(e+1, epochs),
                       "Training Loss: {:.3f}.. ".format(running_loss/print_every),
                       "Test Loss: {:.3f}.. ".format(test_loss/len(testloader)),

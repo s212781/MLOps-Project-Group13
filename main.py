@@ -122,8 +122,8 @@ def sweep_config():
         'name': 'test_loss'
 		},
     'parameters': {
-        'batch_size': {'values': [32, 64, 128]},
-        'epochs': {'values': [2, 5, 10]},
+        'batch_size': {'values': [4, 64, 256]},
+        'epochs': {'values': [2, 5, 6]},
         'lr': {'max': 0.1, 'min': 0.0001}
         }
     }
