@@ -8,6 +8,8 @@ from torch.utils.data import random_split, DataLoader
 from src.data.transforms import train_transform, val_transform
 import subprocess
 from src.models.deploy_model import deploy
+import wandb
+
 #####
 # from src.data.make_dataset import MyDataset
 from src.data.make_dataset_mnist import MyDataset
@@ -15,15 +17,35 @@ from src.data.make_dataset_mnist import MyDataset
 
 
 
-def train(model, batch_size, epochs, num_workers, criterion, optimizer):
+def train():
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("DEVICE", device)
+    # model = create_model()
+    model = Mymodel()
+    model.to(device)    
+
+    # batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
+
+    run = wandb.init(project='MLops13')
+    wandb.watch(model, log_freq=100)
+    batch_size = wandb.config.batch_size
+    epochs = wandb.config.epochs
+    lr  =  wandb.config.lr
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)  
+    num_workers = 1
+
     print("Training...")
     train_dataset, valid_dataset = load_data()
     trainloader = DataLoader(train_dataset, batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
     validloader = DataLoader(valid_dataset, batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
     model = train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
-
-    return model
+    
+    save_checkpoint(model)
+    
+    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)   
+    # return model
 
 def validate(model, model_path, batch_size, num_workers, criterion):
     print("Evaluating...")
@@ -48,14 +70,13 @@ def create_model():
     model = Mymodel()
     return model
 
-def train_params():
-    bs = 64
-    lr  = 0.001
-    epochs = 3
-    num_workers = 0
-    criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
-    return bs, lr, epochs, num_workers, criterion, optimizer
+# def train_params():
+#     bs = 64
+#     lr  = 0.001
+#     epochs = 3
+#     num_workers = 0
+      
+#     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
     # dataset = ImageFolder('data_mnist/')
@@ -92,21 +113,41 @@ def save_checkpoint(model):
 
     torch.save(checkpoint, 'model_v1_0.pth')
 
-if __name__ == "__main__": 
-    #lets use subprocess to import data
-    # subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print("DEVICE", device)
-    model = create_model()
-    model.to(device)
+def sweep_config():
+    sweep_configuration = {
+    'method': 'random',
+    'name': 'sweep',
+    'metric': {
+        'goal': 'minimize', 
+        'name': 'test_loss'
+		},
+    'parameters': {
+        'batch_size': {'values': [32, 64, 128]},
+        'epochs': {'values': [2, 5, 10]},
+        'lr': {'max': 0.1, 'min': 0.0001}
+        }
+    }
+    # Initialize sweep by passing in config. (Optional) Provide a name of the project.
+    sweep_id = wandb.sweep(sweep=sweep_configuration, project='MLops13')
+    # wandb.init()
+    return sweep_id
 
-    batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
+# def main():
+#     #lets use subprocess to import data
+#     # subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
+    
+    
 
-    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+#     # model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
     
-    save_checkpoint(model)
     
-    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
+
+if __name__ == "__main__":
+    
+    sweep_id = sweep_config()
+
+    wandb.agent(sweep_id, function=train, count=4) 
+     
 
     
   
