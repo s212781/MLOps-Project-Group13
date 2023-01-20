@@ -21,7 +21,9 @@ def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     trainloader = DataLoader(train_dataset, batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
     validloader = DataLoader(valid_dataset, batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+    model = train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+
+    return model
 
 def validate(model, model_path, batch_size, num_workers, criterion):
     print("Evaluating...")
@@ -49,7 +51,7 @@ def create_model():
 def train_params():
     bs = 64
     lr  = 0.001
-    epochs = 3
+    epochs = 1
     num_workers = 0
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
