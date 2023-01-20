@@ -1,13 +1,19 @@
 import torch
 from torch import optim, nn
 import torchvision.models as models
-
 from src.features.build_features import MyAwesomeModel as Mymodel
 from src.models import train_model, predict_model
 from torchvision.datasets import ImageFolder
 from torch.utils.data import random_split, DataLoader
-from src.data.make_dataset import MyDataset
 from src.data.transforms import train_transform, val_transform
+import subprocess
+from src.models.deploy_model import deploy
+#####
+# from src.data.make_dataset import MyDataset
+from src.data.make_dataset_mnist import MyDataset
+####
+
+
 
 def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     print("Training...")
@@ -15,14 +21,16 @@ def train(model, batch_size, epochs, num_workers, criterion, optimizer):
     trainloader = DataLoader(train_dataset, batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
     validloader = DataLoader(valid_dataset, batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
+    model = train_model.train(model, trainloader, validloader, criterion, optimizer, epochs)
 
-def validate(model_path, batch_size, num_workers, criterion):
+    return model
+
+def validate(model, model_path, batch_size, num_workers, criterion):
     print("Evaluating...")
     _ , valid_dataset = load_data()
     validloader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
-    model = load_checkpoint(model_path)
+    model = load_checkpoint(model, model_path)
     model.eval()
                 
     # Turn off gradients for validation, will speed up inference
@@ -33,42 +41,45 @@ def validate(model_path, batch_size, num_workers, criterion):
             "Test Accuracy: {:.3f}".format(accuracy/len(validloader)))
 
 def create_model():
-    model = models.resnet152(pretrained=True)
-    num_ftrs = model.fc.in_features
-    
-    model.fc = nn.Linear(num_ftrs, 120)
-   
+    # model = models.resnet152(pretrained=True)
+    # num_ftrs = model.fc.in_features
+    # model.fc = nn.Linear(num_ftrs, 120)
+    # this is the given configuration for the 'tiny' model
+    model = Mymodel()
     return model
 
 def train_params():
     bs = 64
     lr  = 0.001
-    epochs = 5
-    num_workers = 1
+    epochs = 3
+    num_workers = 0
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)    
     return bs, lr, epochs, num_workers, criterion, optimizer
 
 def load_data():
-    dataset = ImageFolder('data/processed/images')
-    
-    random_seed = 45
-    torch.manual_seed(random_seed);
+    # dataset = ImageFolder('data_mnist/')
+    # random_seed = 45
+    # torch.manual_seed(random_seed);
 
-    val_pct = 0.3
-    val_size = int(len(dataset)*val_pct)
-    train_size = len(dataset) - val_size
+    # val_pct = 0.3
+    # val_size = int(len(dataset)*val_pct)
+    # train_size = len(dataset) - val_size
 
-    train_ds, val_ds = random_split(dataset, [train_size, val_size])
+    # train_ds, val_ds = random_split(dataset, [train_size, val_size])
   
-    train_dataset = MyDataset(train_ds, train_transform())
-    val_dataset = MyDataset(val_ds, val_transform())
+    # train_dataset = MyDataset(train_ds, train_transform())
+    # val_dataset = MyDataset(val_ds, val_transform())
+    dataset = 'data_mnist'
+    train_path = dataset + "/train_"
+    test_path = dataset + "/test.npz"
+    train_dataset = MyDataset(train_path, train=True)
+    val_dataset = MyDataset(test_path, train=False)
 
     return train_dataset, val_dataset
 
-def load_checkpoint(filepath):
-    checkpoint = torch.load(filepath)
-    model = Mymodel()
+def load_checkpoint(model, filepath):
+    checkpoint = torch.load(filepath, map_location=torch.device('cuda' if torch.cuda.is_available() else 'cpu'))
     model.load_state_dict(checkpoint['state_dict'])
     
     return model
@@ -76,23 +87,29 @@ def load_checkpoint(filepath):
 def save_checkpoint(model):
     # Giving values but they are not used.
     checkpoint = {'input_size': 1,
-              'output_size': 120,
+              'output_size': 10,
               'state_dict': model.state_dict()}
 
     torch.save(checkpoint, 'model_v1_0.pth')
 
-if __name__ == "__main__":  
+if __name__ == "__main__": 
+    #lets use subprocess to import data
+    # subprocess.run((["dvc pull --remote https://github.com/s212781/MLOps-Project-Group13"]), shell=True)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(device)
+    print("DEVICE", device)
     model = create_model()
     model.to(device)
 
     batch_size, lr, epochs, num_workers, criterion, optimizer = train_params()
 
-    train(model, batch_size, epochs, num_workers, criterion, optimizer)
-    # validate(model_path=??, batch_size, num_workers, criterion)    
+    model = train(model, batch_size, epochs, num_workers, criterion, optimizer)
+    
+    save_checkpoint(model)
+    
+    validate(model, 'model_v1_0.pth', batch_size, num_workers, criterion)    
 
     
+  
 
 
 

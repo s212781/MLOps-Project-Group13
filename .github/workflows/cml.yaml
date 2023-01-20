@@ -1,0 +1,42 @@
+name: model-training
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    container: ghcr.io/iterative/cml:0-dvc2-base1
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v3
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/1037547109290/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: 'my-service-account@dtumlops-374307.iam.gserviceaccount.com'
+      - name: Install requirements
+        run: |
+          #  Install requirements
+          pip install -r requirements.txt
+
+      - name: Pull data 
+        run: |
+          # git config --global --add safe.directory /__w/DTU_MLops_M21_docker_example/DTU_MLops_M21_docker_example
+      
+          # Pull data & run-cache from S3 and reproduce pipeline
+          dvc pull data --run-cache
+          # dvc repro
+
+      - name: Perform unit tests
+        run: |
+           pytest tests/
+      - name: Auto linting
+        run: |
+           black --check --verbose .
+
+      - name: Run python script
+        run: |
+          python main.py
+
+     
