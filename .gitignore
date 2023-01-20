@@ -93,3 +93,5 @@ target/
 /model_v1_0.pth
 /.dvc/cache
 /data_mnist
+/data_lite
+commands_for_makefile.txt
