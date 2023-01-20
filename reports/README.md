@@ -306,6 +306,10 @@ The next image shows wandb's system monitoring. This is hsown since we haven't b
 
 ![wandb_sweep.png](figures/wandb_sweep.PNG)
 
+As can be seen below, wandb works but fails because of a GPU problem.
+
+![wandb_problem.png](figures/wandb_problem.jpeg)
+
 ### Question 15
 
 > **Docker is an important tool for creating containerized applications. Explain how you used docker in your**
